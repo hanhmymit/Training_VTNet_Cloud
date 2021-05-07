@@ -42,17 +42,17 @@ mkdir -p ~/wordpress/html
 ```
 3. create a MariaDB container with name wordpressdb by running the following command
 ```docker run -e MYSQL_ROOT_PASSWORD=root-password -e MYSQL_USER=wpuser -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=wpdb -v /root/wordpress/database:/var/lib/mysql --name wordpressdb -d mariadb```
-Output
+Output  
 ```e8c780b34cdcb66db9278635b109debb1775d6a6b6785c4e74c8e0815e3ba5e3```
 4. check the IP address of MariaDB container with the following command
 ```docker inspect -f '{{ .NetworkSettings.IPAddress }}' wordpressdb```
-Output
+Output  
 ```172.17.0.2```
 5. connect to your MariaDB container using the database user and password  
 ```mysql -u wpuser -h 172.17.0.2 -p
 Enter password:
 ```
-Output:
+Output:  
 ```Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 3
 Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribution
@@ -62,7 +62,7 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 ```
 ```> show databases;```
-Output
+Output  
 ```+--------------------+
 | Database           |
 +--------------------+
