@@ -13,7 +13,8 @@ Hello everyone, here are the steps for me to run the WordPress manually instead 
 
 **Step 1: Create a MariaDB Containerr**
 1. download the WordPress image from the Docker repository using the following command:  
-```# docker pull mariadb```
+```# docker pull mariadb```  
+Output:
 ```root@myhanh:~# docker pull mariadb
 Using default tag: latest
 latest: Pulling from library/mariadb
@@ -31,4 +32,4 @@ e3b5cf124c10: Pull complete
 3352c2c9d21c: Pull complete
 Digest: sha256:36288c675a192bd0a8a99cd6ba0780e31df85f0bfd0cbb204837cd108be3d236
 Status: Downloaded newer image for mariadb:latest
-docker.io/library/mariadb:latest```
+docker.io/library/mariadb:latest
