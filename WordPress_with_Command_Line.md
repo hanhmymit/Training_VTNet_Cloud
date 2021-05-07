@@ -61,7 +61,7 @@ Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribut
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 ```
-```> show databases;```
+```> show databases;```  
 Output  
 ```+--------------------+
 | Database           |
