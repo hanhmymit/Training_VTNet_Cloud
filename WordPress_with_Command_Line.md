@@ -122,5 +122,21 @@ Content-Type: text/html; charset=UTF-8
 ```apt-get install nginx -y```
 2. create a new Nginx virtual host configuration file  
 ```nano /etc/nginx/sites-available/wordpress```
-
+3. Add the following lines
+```server {
+  listen 80;
+  server_name wp.example.com;
+  location / {
+    proxy_pass http://localhost:8081;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+```
+4. Save and close the file, then activate the virtual host with the following command  
+```ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/```
+5. Restart the Nginx service to apply the changes  
+```systemctl restart nginx```  
+**Step 5: Access WordPress Interface**
 
