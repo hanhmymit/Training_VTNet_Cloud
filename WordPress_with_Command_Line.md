@@ -56,9 +56,7 @@ Output:
 ```Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 3
 Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribution
-
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 ```
 ```> show databases;
@@ -70,6 +68,5 @@ Output
 | information_schema |
 | wpdb               |
 +--------------------+
-2 rows in set (0.00 sec)
-```
+2 rows in set (0.00 sec)```
 ```exit;```
