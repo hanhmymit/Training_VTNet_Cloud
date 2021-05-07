@@ -61,7 +61,8 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 ```
-```> show databases;```
+```> show databases;
+```
 Output  
 ```+--------------------+
 | Database           |
