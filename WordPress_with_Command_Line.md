@@ -49,11 +49,13 @@ Output
 Output  
 ```172.17.0.2```
 5. connect to your MariaDB container using the database user and password      
-```mysql -u wpuser -h 172.17.0.2 -p
+```
+mysql -u wpuser -h 172.17.0.2 -p
 Enter password:
 ```
 Output:  
-```Welcome to the MariaDB monitor.  Commands end with ; or \g.
+```
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 3
 Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribution
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
@@ -68,5 +70,6 @@ Output
 | information_schema |
 | wpdb               |
 +--------------------+
-2 rows in set (0.00 sec)```
+2 rows in set (0.00 sec)
+```
 ```exit;```
