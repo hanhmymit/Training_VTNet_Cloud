@@ -48,7 +48,7 @@ Output
 ```docker inspect -f '{{ .NetworkSettings.IPAddress }}' wordpressdb```
 Output
 ```172.17.0.2```
-5. connect to your MariaDB container using the database user and password
+5. connect to your MariaDB container using the database user and password  
 ```mysql -u wpuser -h 172.17.0.2 -p
 Enter password:
 ```
@@ -61,7 +61,7 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 ```
-```show databases;```
+```> show databases;```
 Output
 ```+--------------------+
 | Database           |
