@@ -117,5 +117,10 @@ X-Redirect-By: WordPress
 Location: http://localhost:8081/wp-admin/install.php
 Content-Type: text/html; charset=UTF-8
 ```
+**Step 4: Configure Nginx as a Reverse Proxy**
+1. install the Nginx web server with the following command  
+```apt-get install nginx -y```
+2. create a new Nginx virtual host configuration file  
+```nano /etc/nginx/sites-available/wordpress```
 
 
