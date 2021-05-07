@@ -45,9 +45,10 @@ mkdir -p ~/wordpress/html
 Output  
 ```e8c780b34cdcb66db9278635b109debb1775d6a6b6785c4e74c8e0815e3ba5e3```
 4. check the IP address of MariaDB container with the following command  
-```docker inspect -f '{{ .NetworkSettings.IPAddress }}' wordpressdb```
+```docker inspect -f '{{ .NetworkSettings.IPAddress }}' wordpressdb```  
 Output  
-```172.17.0.2```
+```172.17.0.2
+```
 5. connect to your MariaDB container using the database user and password    
 ```mysql -u wpuser -h 172.17.0.2 -p
 Enter password:
