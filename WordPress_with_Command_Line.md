@@ -105,7 +105,7 @@ docker.io/library/wordpress:latest
 2. create a new WordPress container named wpcontainer from the downloaded image using the following command  
 ```docker run -e WORDPRESS_DB_USER=wpuser -e WORDPRESS_DB_PASSWORD=password -e WORDPRESS_DB_NAME=wpdb -p 8081:80 -v /root/wordpress/html:/var/www/html --link wordpressdb:mysql --name wpcontainer -d wordpress```
 3. verify your WordPress container with the following command  
-```curl -I localhost:8081```
+```curl -I localhost:8081```  
 Output  
 ```HTTP/1.1 302 Found
 Date: Fri, 07 May 2021 10:31:36 GMT
