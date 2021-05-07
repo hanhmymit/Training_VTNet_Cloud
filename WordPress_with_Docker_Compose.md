@@ -64,6 +64,8 @@ volumes:
  ```
  4. ```docker-compose up -d```  
  5. You can then open the public IP or domain of your WordPress server in your web browser to test the installation. You should be redirected to the WordPress initial setup page like the image shown below.  
+ ![image](https://user-images.githubusercontent.com/46991949/117460539-d20cfb80-af76-11eb-89a0-efa2e5d721f6.png)
+
    
  
      
