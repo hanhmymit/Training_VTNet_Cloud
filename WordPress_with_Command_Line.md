@@ -11,7 +11,7 @@ Hello everyone, here are the steps for me to run the WordPress manually instead 
 4. After installing both packages, check the installed version of Docker with the following command:  
 ```$ docker --version```
 
-**Step 1: Create a MariaDB Containerr**
+**Step 2: Create a MariaDB Containerr**
 1. download the WordPress image from the Docker repository using the following command:  
 ```# docker pull mariadb```  
 
@@ -72,3 +72,36 @@ Output
 2 rows in set (0.00 sec)
 ```
 ```exit;```
+**Step 3: Create a WordPress Container**
+1. download the WordPress image from the Docker repository using the following command:
+```docker pull wordpress:latest```
+Output
+```latest: Pulling from library/wordpress
+f7ec5a41d630: Pull complete
+941223b59841: Pull complete
+a5f2415e5a0c: Pull complete
+b9844b87f0e3: Pull complete
+5a07de50525b: Pull complete
+caeca1337a66: Pull complete
+5dbe0d7f8481: Pull complete
+b5287b60e185: Pull complete
+a3bdca77fbaf: Pull complete
+e3edcade6aa2: Pull complete
+703ba034e6f0: Pull complete
+36ef47972442: Pull complete
+4acb239a9263: Pull complete
+e74d610ba693: Pull complete
+97f505d02f6f: Pull complete
+d6dd6701aaec: Pull complete
+43ef3ceb4f4b: Pull complete
+a59b940a007f: Pull complete
+714359ef8f41: Pull complete
+24b7e9a8c62d: Pull complete
+b400ea29ad59: Pull complete
+Digest: sha256:208def35d7fcbbfd76df18997ce6cd5a5221c0256221b7fdaba41c575882d4f0
+Status: Downloaded newer image for wordpress:latest
+docker.io/library/wordpress:latest
+```
+2. create a new WordPress container named wpcontainer from the downloaded image using the following command
+```docker run -e WORDPRESS_DB_USER=wpuser -e WORDPRESS_DB_PASSWORD=password -e WORDPRESS_DB_NAME=wpdb -p 8081:80 -v /root/wordpress/html:/var/www/html --link wordpressdb:mysql --name wpcontainer -d wordpress```
+
