@@ -140,4 +140,6 @@ Content-Type: text/html; charset=UTF-8
 ```systemctl restart nginx```
 
 **Step 5: Access WordPress Interface**
+Open your web browser and type the URL localhost:8081(Or: ip_ubuntuServer:8081). You will be redirected to the WordPress installation wizard
+![image](https://user-images.githubusercontent.com/46991949/117438667-0cb56a80-af5c-11eb-97b7-dcfb4bbb0132.png)
 
