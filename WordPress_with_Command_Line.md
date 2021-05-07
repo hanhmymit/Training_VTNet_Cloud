@@ -71,7 +71,7 @@ Output
 +--------------------+
 2 rows in set (0.00 sec)
 ```
-```exit;```
+```exit;```  
 **Step 3: Create a WordPress Container**
 1. download the WordPress image from the Docker repository using the following command:
 ```docker pull wordpress:latest```
@@ -102,6 +102,20 @@ Digest: sha256:208def35d7fcbbfd76df18997ce6cd5a5221c0256221b7fdaba41c575882d4f0
 Status: Downloaded newer image for wordpress:latest
 docker.io/library/wordpress:latest
 ```
-2. create a new WordPress container named wpcontainer from the downloaded image using the following command
+2. create a new WordPress container named wpcontainer from the downloaded image using the following command  
 ```docker run -e WORDPRESS_DB_USER=wpuser -e WORDPRESS_DB_PASSWORD=password -e WORDPRESS_DB_NAME=wpdb -p 8081:80 -v /root/wordpress/html:/var/www/html --link wordpressdb:mysql --name wpcontainer -d wordpress```
+3. verify your WordPress container with the following command  
+```curl -I localhost:8081```
+Output  
+```HTTP/1.1 302 Found
+Date: Fri, 07 May 2021 10:31:36 GMT
+Server: Apache/2.4.38 (Debian)
+X-Powered-By: PHP/7.4.19
+Expires: Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control: no-cache, must-revalidate, max-age=0
+X-Redirect-By: WordPress
+Location: http://localhost:8081/wp-admin/install.php
+Content-Type: text/html; charset=UTF-8
+```
+
 
