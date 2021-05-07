@@ -13,24 +13,54 @@
 2. Create a docker-compose.yml file. This will tell docker how to configure and start the WordPress and MariaDB containers.
 ```nano docker-compose.yml```  
 3. Copy the example underneath and set the parameters in the file. Replace the database password and public_ip with values appropriate to your cloud server. Make sure the password is the same for both environment variables so that WordPress will be able to access the database.  
-```wordpress:
-    image: wordpress
-    links:
-     - mariadb:mysql
+```version: '3'
+
+services:
+  # Database
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
     environment:
-     - WORDPRESS_DB_PASSWORD=password
-     - WORDPRESS_DB_USER=root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - wpsite
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
     ports:
-     - "public_ip:80:80"
-    volumes:
-     - ./html:/var/www/html
-mariadb:
-    image: mariadb
+      - '8080:80'
     environment:
-     - MYSQL_ROOT_PASSWORD=password
-     - MYSQL_DATABASE=wordpress
-    volumes:
-     - ./database:/var/lib/mysql 
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password 
+    networks:
+      - wpsite
+  # Wordpress
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - '8000:80'
+    restart: always
+    volumes: ['./:/var/www/html']
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    networks:
+      - wpsite
+networks:
+  wpsite:
+volumes:
+  db_data: 
  ```
  4. ```docker-compose up -d```  
  5. You can then open the public IP or domain of your WordPress server in your web browser to test the installation. You should be redirected to the WordPress initial setup page like the image shown below.  
