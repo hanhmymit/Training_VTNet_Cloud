@@ -138,5 +138,6 @@ Content-Type: text/html; charset=UTF-8
 ```ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/```
 5. Restart the Nginx service to apply the changes  
 ```systemctl restart nginx```
+
 **Step 5: Access WordPress Interface**
 
