@@ -38,7 +38,8 @@ docker.io/library/mariadb:latest
 2. create a directory structure for WordPress on your server:
 ```mkdir ~/wordpress
 mkdir -p ~/wordpress/database
-mkdir -p ~/wordpress/html```
+mkdir -p ~/wordpress/html
+```
 3. create a MariaDB container with name wordpressdb by running the following command
 ```docker run -e MYSQL_ROOT_PASSWORD=root-password -e MYSQL_USER=wpuser -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=wpdb -v /root/wordpress/database:/var/lib/mysql --name wordpressdb -d mariadb
 ```
@@ -47,8 +48,7 @@ Output
 4. check the IP address of MariaDB container with the following command  
 ```docker inspect -f '{{ .NetworkSettings.IPAddress }}' wordpressdb```  
 Output  
-```172.17.0.2
-```
+```172.17.0.2```
 5. connect to your MariaDB container using the database user and password      
 ```mysql -u wpuser -h 172.17.0.2 -p
 Enter password:
