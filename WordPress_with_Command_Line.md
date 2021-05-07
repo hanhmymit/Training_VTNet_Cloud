@@ -38,9 +38,8 @@ docker.io/library/mariadb:latest
 2. create a directory structure for WordPress on your server:
 ```mkdir ~/wordpress
 mkdir -p ~/wordpress/database
-mkdir -p ~/wordpress/html
-```
-3. create a MariaDB container with name wordpressdb by running the following command  
+mkdir -p ~/wordpress/html```
+3. create a MariaDB container with name wordpressdb by running the following command
 ```docker run -e MYSQL_ROOT_PASSWORD=root-password -e MYSQL_USER=wpuser -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=wpdb -v /root/wordpress/database:/var/lib/mysql --name wordpressdb -d mariadb
 ```
 Output  
