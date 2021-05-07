@@ -33,5 +33,42 @@ e3b5cf124c10: Pull complete
 3352c2c9d21c: Pull complete
 Digest: sha256:36288c675a192bd0a8a99cd6ba0780e31df85f0bfd0cbb204837cd108be3d236
 Status: Downloaded newer image for mariadb:latest
-docker.io/library/mariadb:latest```
-2. 
+docker.io/library/mariadb:latest
+```
+2. create a directory structure for WordPress on your server:
+```mkdir ~/wordpress
+mkdir -p ~/wordpress/database
+mkdir -p ~/wordpress/html
+```
+3. create a MariaDB container with name wordpressdb by running the following command
+```docker run -e MYSQL_ROOT_PASSWORD=root-password -e MYSQL_USER=wpuser -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=wpdb -v /root/wordpress/database:/var/lib/mysql --name wordpressdb -d mariadb```
+Output
+```e8c780b34cdcb66db9278635b109debb1775d6a6b6785c4e74c8e0815e3ba5e3```
+4. check the IP address of MariaDB container with the following command
+```docker inspect -f '{{ .NetworkSettings.IPAddress }}' wordpressdb```
+Output
+```172.17.0.2```
+5. connect to your MariaDB container using the database user and password
+```mysql -u wpuser -h 172.17.0.2 -p
+Enter password:
+```
+Output:
+```Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+```
+```show databases;```
+Output
+```+--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| wpdb               |
++--------------------+
+2 rows in set (0.00 sec)
+```
+```exit;```
