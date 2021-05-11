@@ -30,4 +30,13 @@
 ```sudo systemctl status sshd```  
 *Output*  
 ![image](https://user-images.githubusercontent.com/46991949/117784969-4e9d2400-b26e-11eb-801b-50acd10ba7ad.png)
+4. Configuring the Ansible Control Node  
+* As root, add an administrator-level user for the control node. Use the adduser command  
+```sudo adduser [username]```  
+*Output*  
+![image](https://user-images.githubusercontent.com/46991949/117825259-61791e00-b299-11eb-9fe8-a7e262c4bede.png)
+*Username: user01, pass: 123456*  
+* The new account is ready. Now, assign administrative access to the account. The following command assigns superuser privileges, allowing the account to use the sudo command  
+```sudo usermod -aG sudo [username]```  
+
 
