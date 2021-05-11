@@ -35,8 +35,14 @@
 ```sudo adduser [username]```  
 *Output*  
 ![image](https://user-images.githubusercontent.com/46991949/117825259-61791e00-b299-11eb-9fe8-a7e262c4bede.png)
-*Username: user01, pass: 123456*  
+*Note: Username: user01, pass: 123456*  
 * The new account is ready. Now, assign administrative access to the account. The following command assigns superuser privileges, allowing the account to use the sudo command  
 ```sudo usermod -aG sudo [username]```  
+5. Configuring an Ansible Host  
+* The easiest method of setting up an SSH public key is to copy it using the ssh-copy-id command  
+```ssh-copy-id username@remote_host```  
+*Output*  
+![image](https://user-images.githubusercontent.com/46991949/117826714-933eb480-b29a-11eb-8b58-97261d4cbb0d.png)
+
 
 
