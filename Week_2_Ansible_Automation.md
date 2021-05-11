@@ -1,7 +1,7 @@
 
 # Practice 1: Using Ansible to deploy Wordpress (docker) on Ubuntu VM  
 
-**Step 1: Setup Ansible on Controller machine  
+**Step 1: Setup Ansible on Controller machine**  
 
 1. Update the APT package repository cache with the following command  
 ```sudo apt-add-repository ppa:ansible/ansible```  
