@@ -44,5 +44,21 @@
 *Output*  
 ![image](https://user-images.githubusercontent.com/46991949/117826714-933eb480-b29a-11eb-8b58-97261d4cbb0d.png)
 
+**Step 3: Setting up the Inventory File**  
+
+1. To access the inventory file, use the following command in the control node’s terminal  
+```sudo nano /etc/ansible/hosts```  
+![image](https://user-images.githubusercontent.com/46991949/117827787-7d7dbf00-b29b-11eb-9ab6-a0e624af7114.png)
+2.  Once you are done adding items to Ansible’s inventory, hit Ctrl+X and then press Y to save the inventory file  
+3.  After you’ve set up the inventory file, you can always check it again by using  
+```ansible-inventory --list -y```  
+*Output*  
+![image](https://user-images.githubusercontent.com/46991949/117828046-b0c04e00-b29b-11eb-937b-c5014439e134.png)
+4. Testing the Connection  
+* To test the connection with the hosts, use the following command in the terminal on your control node  
+```ansible all -m ping```  
+*Output*  
+![image](https://user-images.githubusercontent.com/46991949/117828830-67243300-b29c-11eb-98ff-a8812de212da.png)
+
 
 
