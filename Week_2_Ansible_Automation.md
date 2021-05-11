@@ -9,7 +9,7 @@
 2. install Ansible with the following command  
 ```sudo apt install ansible```  
 3. Run the following command to check if ansible is working correctly  
-```ansible --version``` 
+```ansible --version```   
 Output  
 ![image](https://user-images.githubusercontent.com/46991949/117783891-29f47c80-b26d-11eb-8355-9c4abc0248fa.png)
 
