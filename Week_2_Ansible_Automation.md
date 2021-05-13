@@ -125,32 +125,73 @@ ansible_user=myhanh
 **Step 3. Configure and run ansible playbook to install docker on managed machine**  
 
 Create file /roles/docker_playbook.yaml
-```---
-- name: Install MariaDb
-  hosts: server
+```- name: deploy mariadb
+  hosts: server1
   gather_facts: false
-
   tasks:
-  - name: create network
-    become: yes
-    command: docker network create wordpress-network
-  - name: create volume for db
-    become: yes
-    command: docker volume create --name mariadb_data
-  - name:  run image mariadb
-    become: yes
-    command: docker run -d --name mariadb --env ALLOW_EMPTY_PASSWORD=yes --env MARIADB_USER=bn_wordpress --env MARIADB_PASSWORD=bitnami --env MARIADB_DATABASE=bitnami_wordpress --network wordpress-network --volume mariadb_data:/bitnami/mariadb bitnami/mariadb:latest
-  - name: create volume for web
-    become: yes
-    command: docker volume create --name wordpress_data
-  - name:  run image wordpress
-    become: yes
-    command: docker run -d --name wordpress -p 80:8080 -p 443:8443  --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress  --env WORDPRESS_DATABASE_PASSWORD=bitnami  --env WORDPRESS_DATABASE_NAME=bitnami_wordpress --network wordpress-network --volume wordpress_data:/bitnami/wordpress  bitnami/wordpress:latest
+    - name: Ensure docker service is running
+      become: yes
+      service:
+        name: docker
+        state: started
+    - name: Create a volume for MariaDB
+      become: yes
+      command: docker volume create --name mariadb_data
+    - name: Create a MariaDB container
+      become: yes
+$wordpress --env MARIADB_PASSWORD=abitnami --env MARIADB_DATABASE=bitnami_awordpress --network host --volu$
  ```  
  Run: ```ansible_playbooks$ ansible-playbook -i inventory.ini roles/docker_playbooks.yaml -k -K```  
- ![image](https://user-images.githubusercontent.com/46991949/118128820-9ca85800-b425-11eb-9da2-e4f4ee7ea033.png)
-
+ ![image](https://user-images.githubusercontent.com/46991949/118128820-9ca85800-b425-11eb-9da2-e4f4ee7ea033.png)  
  
+ **Step 4: Create file /roles/mariadb.yaml**
+ 
+ ```name: deploy mariadb
+  hosts: server1
+  gather_facts: false
+  tasks:
+    - name: Ensure docker service is running
+      become: yes
+      service:
+        name: docker
+        state: started
+    - name: Create a volume for MariaDB
+      become: yes
+      command: docker volume create --name mariadb_data
+    - name: Create a MariaDB container
+      become: yes
+$wordpress --env MARIADB_PASSWORD=abitnami --env MARIADB_DATABASE=bitnami_awordpress --network host --volu$
+```  
+Run: ```ansible_playbooks$ ansible-playbook -i inventory.ini roles/mariadb.yaml -k -K```  
+
+![image](https://user-images.githubusercontent.com/46991949/118129774-cb72fe00-b426-11eb-9000-3b035a47f54d.png)  
+
+**Step 5: Create file /roles/worpress.yaml**  
+
+```- name: deploy wordpress
+  hosts: server2
+  gather_facts: false
+  tasks:
+    - name: Ensure docker service is running
+      become: yes
+      service:
+        name: docker
+        state: started
+    - name: Create a volume for wordpress
+      become: yes
+      command: docker volume create --name wordpress_data
+    - name: Create the Wordpress container
+      become: yes
+      command: docker run -d --name wordpress -p 8080:8080 -p 8443:8443 --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress --env WORDPRESS_DATABASE_PASSWORD=bitnami --env WORDPRESS_DATABASE_NAME=bitnami_wordpress --network host --add-host mariadb:192.168.0.109 --volume wordpress_data:/bitnami/wordpress bitnami/wordpress:latest
+```  
+Run: ```ansible_playbooks$ ansible-playbook -i inventory.ini roles/worpress.yaml -k -K```  
+![image](https://user-images.githubusercontent.com/46991949/118130961-23f6cb00-b428-11eb-8025-98015ef224f8.png)
+
+
+*Output*
+![image](https://user-images.githubusercontent.com/46991949/118132289-b9df2580-b429-11eb-8b10-7a9b254d5cde.png)
+
+
 
  
 
