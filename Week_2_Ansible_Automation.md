@@ -111,7 +111,7 @@ ansible_user=myhanh
 
 *Note*  
 *1. VM1: 192.168.0.109 ---> Mariadb*  
-*2. VM2: 192.16.0.115  --->Worpress*  
+*2. VM2: 192.16.0.115  --->Wordpress*  
 *3. Controller node: 192.168.0.114*  
 *On machines VM1, VM2 install :```sudo apt-get install -y sshpass```*  
 
