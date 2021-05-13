@@ -62,7 +62,7 @@
 *Output*  
 ![image](https://user-images.githubusercontent.com/46991949/117828830-67243300-b29c-11eb-98ff-a8812de212da.png)
 
-**Step 4: Make your first profect in folder named "ansible-playbooks"  
+**Step 4: Make your first profect in folder named "ansible-playbooks"**    
 
 1. Create create files "ansible.cfg"  
 ```[defaults]
@@ -110,6 +110,10 @@ ansible_user=myhanh
   - name : type the following command
     command: 
      cmd: su - ${USER}
-    ```
-    
+ ```  
+ 4. Run playbook ```ansible-playbook -i inventory.ini roles/install_docker-playbook.yaml```
+ *Output*
+ 
+
+ 
 
