@@ -38,6 +38,8 @@
 *Note: Username: user01, pass: 123456*  
 * The new account is ready. Now, assign administrative access to the account. The following command assigns superuser privileges, allowing the account to use the sudo command  
 ```sudo usermod -aG sudo [username]```  
+* Setting Up a Basic Firewal  
+![image](https://user-images.githubusercontent.com/46991949/118068418-8c17c380-b3cc-11eb-9d31-c78a15d2119c.png)
 5. Configuring an Ansible Host  
 * The easiest method of setting up an SSH public key is to copy it using the ssh-copy-id command  
 ```ssh-copy-id username@remote_host```  
@@ -60,5 +62,54 @@
 *Output*  
 ![image](https://user-images.githubusercontent.com/46991949/117828830-67243300-b29c-11eb-98ff-a8812de212da.png)
 
+**Step 4: Make your first profect in folder named "ansible-playbooks"  
 
+1. Create create files "ansible.cfg"  
+```[defaults]
+host_key_checking = False
+remote_user = controller
+```    
+2. Create create files "inventory.ini"
+```[server]
+192.168.0.115
+[server:vars]
+ansible_become_pass1
+ansible_ssh_pass=1
+ansible_user=myhanh
+```  
+3. Create create folder "roles", Create create files "roles/install_docker-playbook.yaml"
+```- name : install docker
+  hosts: server
+  gather_facts: false
+
+  tasks:
+  - name : ping
+    ping:
+    register: result
+
+  - name : print ping data
+    debug:
+      var : result
+
+  - name : install docker.io and python3 for Docker sdk
+    become : yes
+    apt: 
+      name : docker.io, python3
+      state: present
+  
+  - name : ensure docker service is running
+    become : yes
+    service: 
+      name: docker
+      state: started
+   
+  - name : add user to docker group
+    command:
+     cmd: sudo usermod -aG docker ${USER}
+
+  - name : type the following command
+    command: 
+     cmd: su - ${USER}
+    ```
+    
 
