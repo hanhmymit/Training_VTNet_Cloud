@@ -100,8 +100,10 @@ ansible_user=myhanh
     become: yes
     command: docker run -d --name wordpress -p 80:8080 -p 443:8443  --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress  --env WORDPRESS_DATABASE_PASSWORD=bitnami  --env WORDPRESS_DATABASE_NAME=bitnami_wordpress --network wordpress-network --volume wordpress_data:/bitnami/wordpress  bitnami/wordpress:latest
  ```  
- 4. Run playbook ```ansible-playbook -i inventory.ini roles/install_docker-playbook.yaml```
- *Output*
+ 4. Run playbook ```ansible-playbook -i inventory.ini roles/install_docker-playbook.yaml -k -K```  
+ *Output*  
+ ![image](https://user-images.githubusercontent.com/46991949/118071722-84f3b400-b3d2-11eb-8e2d-8539a49c6f17.png)
+
  
 
  
