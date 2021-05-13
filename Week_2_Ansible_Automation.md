@@ -107,7 +107,44 @@ ansible_user=myhanh
  Now access your application on managed node at https://localhost:80 or https://localhost:443  
  ![image](https://user-images.githubusercontent.com/46991949/118071862-d603a800-b3d2-11eb-87d2-dd9400630e63.png)
 
+# Practice 2: Using Ansible to set up docker on VMs and deploy Wordpress on VM1, MariaDB on VM2
 
+**Step 1. Create create files "ansible.cfg"**    
+```[defaults]
+host_key_checking = False
+remote_user = controller
+```    
+**Step 2. Create create files "inventory.ini"**  
+```[server]
+192.168.0.115
+[server:vars]
+ansible_become_pass1
+ansible_ssh_pass=1
+ansible_user=myhanh
+```  
+**Step 3. Create create folder "roles", Create create files "roles/install_docker-playbook.yaml"**  
+```---
+- name: Install MariaDb
+  hosts: server
+  gather_facts: false
+
+  tasks:
+  - name: create network
+    become: yes
+    command: docker network create wordpress-network
+  - name: create volume for db
+    become: yes
+    command: docker volume create --name mariadb_data
+  - name:  run image mariadb
+    become: yes
+    command: docker run -d --name mariadb --env ALLOW_EMPTY_PASSWORD=yes --env MARIADB_USER=bn_wordpress --env MARIADB_PASSWORD=bitnami --env MARIADB_DATABASE=bitnami_wordpress --network wordpress-network --volume mariadb_data:/bitnami/mariadb bitnami/mariadb:latest
+  - name: create volume for web
+    become: yes
+    command: docker volume create --name wordpress_data
+  - name:  run image wordpress
+    become: yes
+    command: docker run -d --name wordpress -p 80:8080 -p 443:8443  --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress  --env WORDPRESS_DATABASE_PASSWORD=bitnami  --env WORDPRESS_DATABASE_NAME=bitnami_wordpress --network wordpress-network --volume wordpress_data:/bitnami/wordpress  bitnami/wordpress:latest
+ ```  
  
 
  
