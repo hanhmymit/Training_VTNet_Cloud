@@ -116,36 +116,47 @@ ansible_user=myhanh
 *On machines VM1, VM2 install :```sudo apt-get install -y sshpass```*  
 
 **Step 1. Create create files "ansible.cfg"**    
-```[defaults]
+```[default]
 host_key_checking = False
-remote_user = controller
+remote_user = vm1
 ```    
 **Step 2. Create create files "inventory.ini"**  
-```[server]
+```[server1]
+192.168.0.109
+[server2]
 192.168.0.115
-[server:vars]
-ansible_become_pass1
-ansible_ssh_pass=1
+[server1:vars]
 ansible_user=myhanh
+ansible_ssh_user=myhanh
+ansible_ssh_pass=1
+ansible_ssh_pass=1
+[server2:vars]
+ansible_user=myhanh
+ansible_ssh_user=myhanh
+ansible_ssh_pass=1
+ansible_ssh_pass=1
+ansible_python_interpreter=/usr/bin/python3
 ```  
 **Step 3. Configure and run ansible playbook to install docker on managed machine**  
 
 Create file /roles/docker_playbook.yaml
-```- name: deploy mariadb
-  hosts: server1
+```- name: set up docker
+  hosts: all
   gather_facts: false
   tasks:
+    - name: Ping
+      ping:
+      register: result
+    - name: Install docker.io
+      become: yes
+      apt:
+        name: docker.io
+        state: present
     - name: Ensure docker service is running
       become: yes
       service:
         name: docker
         state: started
-    - name: Create a volume for MariaDB
-      become: yes
-      command: docker volume create --name mariadb_data
-    - name: Create a MariaDB container
-      become: yes
-$wordpress --env MARIADB_PASSWORD=abitnami --env MARIADB_DATABASE=bitnami_awordpress --network host --volu$
  ```  
  Run: ```ansible_playbooks$ ansible-playbook -i inventory.ini roles/docker_playbooks.yaml -k -K```  
  ![image](https://user-images.githubusercontent.com/46991949/118128820-9ca85800-b425-11eb-9da2-e4f4ee7ea033.png)  
