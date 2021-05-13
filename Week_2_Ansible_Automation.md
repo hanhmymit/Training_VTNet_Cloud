@@ -78,38 +78,27 @@ ansible_ssh_pass=1
 ansible_user=myhanh
 ```  
 3. Create create folder "roles", Create create files "roles/install_docker-playbook.yaml"
-```- name : install docker
+```---
+- name: Install MariaDb
   hosts: server
   gather_facts: false
 
   tasks:
-  - name : ping
-    ping:
-    register: result
-
-  - name : print ping data
-    debug:
-      var : result
-
-  - name : install docker.io and python3 for Docker sdk
-    become : yes
-    apt: 
-      name : docker.io, python3
-      state: present
-  
-  - name : ensure docker service is running
-    become : yes
-    service: 
-      name: docker
-      state: started
-   
-  - name : add user to docker group
-    command:
-     cmd: sudo usermod -aG docker ${USER}
-
-  - name : type the following command
-    command: 
-     cmd: su - ${USER}
+  - name: create network
+    become: yes
+    command: docker network create wordpress-network
+  - name: create volume for db
+    become: yes
+    command: docker volume create --name mariadb_data
+  - name:  run image mariadb
+    become: yes
+    command: docker run -d --name mariadb --env ALLOW_EMPTY_PASSWORD=yes --env MARIADB_USER=bn_wordpress --env MARIADB_PASSWORD=bitnami --env MARIADB_DATABASE=bitnami_wordpress --network wordpress-network --volume mariadb_data:/bitnami/mariadb bitnami/mariadb:latest
+  - name: create volume for web
+    become: yes
+    command: docker volume create --name wordpress_data
+  - name:  run image wordpress
+    become: yes
+    command: docker run -d --name wordpress -p 80:8080 -p 443:8443  --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress  --env WORDPRESS_DATABASE_PASSWORD=bitnami  --env WORDPRESS_DATABASE_NAME=bitnami_wordpress --network wordpress-network --volume wordpress_data:/bitnami/wordpress  bitnami/wordpress:latest
  ```  
  4. Run playbook ```ansible-playbook -i inventory.ini roles/install_docker-playbook.yaml```
  *Output*
