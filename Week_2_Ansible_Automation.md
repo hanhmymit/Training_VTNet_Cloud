@@ -102,7 +102,11 @@ ansible_user=myhanh
  ```  
  4. Run playbook ```ansible-playbook -i inventory.ini roles/install_docker-playbook.yaml -k -K```  
  *Output*  
- ![image](https://user-images.githubusercontent.com/46991949/118071722-84f3b400-b3d2-11eb-8e2d-8539a49c6f17.png)
+ ![image](https://user-images.githubusercontent.com/46991949/118071722-84f3b400-b3d2-11eb-8e2d-8539a49c6f17.png)  
+ 
+ Now access your application on managed node at https://localhost:80 or https://localhost:443  
+ ![image](https://user-images.githubusercontent.com/46991949/118071862-d603a800-b3d2-11eb-87d2-dd9400630e63.png)
+
 
  
 
