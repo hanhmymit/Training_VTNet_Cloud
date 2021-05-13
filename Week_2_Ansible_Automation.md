@@ -109,11 +109,12 @@ ansible_user=myhanh
 
 # Practice 2: Using Ansible to set up docker on VMs and deploy Wordpress on VM1, MariaDB on VM2
 
-*Note
-1. VM1: 192.168.0.109 ---> Mariadb
-2. VM2: 192.16.0.115  --->Worpress*
-*3. Controller node: 192.168.0.114*
-*On machines VM1, VM2 install :```sudo apt-get install -y sshpass``` *
+*Note*  
+*1. VM1: 192.168.0.109 ---> Mariadb*  
+*2. VM2: 192.16.0.115  --->Worpress*  
+*3. Controller node: 192.168.0.114*  
+*On machines VM1, VM2 install :```sudo apt-get install -y sshpass```*  
+
 **Step 1. Create create files "ansible.cfg"**    
 ```[defaults]
 host_key_checking = False
