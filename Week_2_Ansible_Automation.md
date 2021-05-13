@@ -188,7 +188,7 @@ Run: ```ansible_playbooks$ ansible-playbook -i inventory.ini roles/worpress.yaml
 ![image](https://user-images.githubusercontent.com/46991949/118130961-23f6cb00-b428-11eb-8025-98015ef224f8.png)
 
 
-*Output*
+*Output*  
 ![image](https://user-images.githubusercontent.com/46991949/118132289-b9df2580-b429-11eb-8b10-7a9b254d5cde.png)
 
 
