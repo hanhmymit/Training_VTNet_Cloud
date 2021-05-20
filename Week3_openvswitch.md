@@ -73,7 +73,45 @@ VXLAN frame format:
 ```sudo ifconfig enp0s3 0 && ifconfig br1 192.168.1.2/24```
 
 5. Trên host2 tạo chế độ mạng bridge cho vswitch br1 và card mạng enp0s3
-```ovs-vsctl add-port br1 enp0s3```   
- ```ifconfig enp0s3 0 && ifconfig br1 192.168.1.227/24
+```sudo ovs-vsctl add-port br1 enp0s3```   
+```sudo ifconfig enp0s3 0 && ifconfig br1 192.168.1.227/24```  
+
+6. Add lại route trên cả 2 host  
+```sudo route add default gw 192.168.30.1 br1```  
+
+7. Cấu hình IP cho br0 trên Host
+* Trên host1
+```sudo ip a add 10.0.0.1/24 dev br0```  
+* Trên host2
+```sudo ip a add 10.0.0.2/24 dev br0```  
+
+8. Cấu hình VXLAN tunnel cho vswitch br0 trên host
+* Trên host1
+```sudo ovs-vsctl add-port br0 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.2```  
+* Trên host2  
+```sudo ovs-vsctl add-port br0 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.227```  
+![image](https://user-images.githubusercontent.com/46991949/118945988-2e611980-b980-11eb-869a-2e5e6d67962a.png)
+
+9. Tạo mạng ovs0 với vswitch ovs1 trên cả 2 host   
+* nano ovs0.xml  
+```<network>
+ 	<name>ovs0</name>
+ 	<forward mode='bridge'/>
+ 	<bridge name='br0'/>
+ 	<virtualport type='openvswitch'/>
+ </network>
+ ```  
+* ```sudo virsh net-define ovs0.xml```    
+![image](https://user-images.githubusercontent.com/46991949/118946656-cced7a80-b980-11eb-8cb8-9569a056d050.png)
+*```virsh net-start ovs0```  
+* ```virsh net-autostart ovs0```  
+![image](https://user-images.githubusercontent.com/46991949/118946882-0625ea80-b981-11eb-9df2-5af325738d60.png)  
+
+10. Create Virtual machines testvm and attach network ovs0 vừa tạo ở trên  
+* Trên host1  
+```sudo virt-install --name=testvm1 --ram=512 --vcpus=1 --cdrom=/root/ubuntu-16.04.2-server-amd64.iso --os-type=linux --os-variant=ubuntu16.04 --network network:ovs0 --disk path=/var/lib/libvirt/images/testvm2.dsk,size=8```  
+
+
+ 
 
 
