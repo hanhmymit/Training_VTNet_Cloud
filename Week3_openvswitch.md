@@ -81,7 +81,7 @@ VXLAN frame format:
 
 7. Cấu hình IP cho br0 trên Host
 * Trên host1
-```sudo ip a add 10.0.0.1/24 dev br0```  
+```sudo ip a add 10.0.0.1/24 dev br0```
 * Trên host2
 ```sudo ip a add 10.0.0.2/24 dev br0```  
 
