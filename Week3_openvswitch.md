@@ -77,7 +77,7 @@ VXLAN frame format:
 ```sudo ifconfig enp0s3 0 && ifconfig br1 192.168.1.227/24```  
 
 6. Add lại route trên cả 2 host  
-```sudo route add default gw 192.168.30.1 br1```  
+```sudo route add default gw 192.168.1.1 br1```  
 
 7. Cấu hình IP cho br0 trên Host
 * Trên host1
