@@ -28,19 +28,20 @@ VXLAN frame format:
     
 **Chuẩn bị**  
 1. Topology:  
-* Host 1: 192.168.30.130
-    vm1(cirros0): 10.0.0.101/24
-    vswitch br0: 10.0.0.1
-    vswitch br1: 192.168.30.130  
+* Host 1: 192.168.1.2  
+    vm1(cirros0): 10.0.0.101/24  
+    vswitch br0: 10.0.0.1  
+    vswitch br1: 192.168.1.2    
     
-* Host 2: 192.168.30.184
-    vm2(cirros1): 10.0.0.102/24
-    vswitch br0: 10.0.0.2
-    vswitch br1: 192.168.30.184  
+* Host 2: 192.168.1.227  
+    vm2(cirros1): 10.0.0.102/24  
+    vswitch br0: 10.0.0.2  
+    vswitch br1: 192.168.1.227    
+![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
 2. Mô tả:
 * Dưới đây mình sẽ thực hiện 1 bài lab sử dụng vmware để chạy 2 máy ảo host1, host2 đóng vai trò như các node vật lí trong thực tế.
-* Trên 2 host này, sẽ được cài hệ điều hành Ubuntu Server 16.04, cài sẵn các phần mềm Open vSwitch, KVM với QEMU, libvirt-bin để tạo các vm. 2 host này đều sủ dụng card mạng ens33 ( coi như là card mạng vật lý).
+* Trên 2 host này, sẽ được cài hệ điều hành Ubuntu Destop 18.04, cài sẵn các phần mềm Open vSwitch, KVM với QEMU, libvirt-bin để tạo các vm. 2 host này đều sủ dụng card mạng ens33 ( coi như là card mạng vật lý).
 * Dùng wireshark để bắt và phân tích gói tin VXLAN
 
 3. Cấu hình:
@@ -49,15 +50,26 @@ VXLAN frame format:
 * Trên HOST 1, tạo VM1(cirros1) kết nối với vSwitch br0. Trên HOST 2 tạo VM2(cirros2) kết nối với vSwitch br0.
 
 **Step 1: Create 2 Linux virtual machines and install openvswitch**  
-1. Create 2 Linux virtual machines 
-* VM1: 192.168.1.227  
-* VM2: 192.168.1.2
 
-2. Install openvswitc on OVS  
+1. Open vSwitch và KVM trên cả 2 Host  
 * ```sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils```  
 * ```sudo apt-get install openvswitch-switch```  
 * ```libvirtd --version```  
-![image](https://user-images.githubusercontent.com/46991949/118797900-3f018900-b8c7-11eb-8d3d-3033e6ffc320.png)
+![image](https://user-images.githubusercontent.com/46991949/118910290-6c454a00-b94e-11eb-9f08-d89426584f46.png)  
+
+2. Tạo 2 vswitch br0 và br1 trên cả 2 Host  
+```sudo ovs-vsctl add-br br0```  
+```sudo ovs-vsctl add-br br1```  
+
+3. Bật 2 vswitch trên cả 2 Host  
+```sudo ip link set dev br0 up```  
+```sudo ip link set dev br1 up```  
+![image](https://user-images.githubusercontent.com/46991949/118910589-ef66a000-b94e-11eb-870e-ed037da975c7.png)
+
+4. Trên host1 tạo chế độ mạng bridge cho vswitch br1 và card mạng ens33  
+```sudo ovs-vsctl add-port br1 ens33```  
+```sudo ifconfig ens33 0 && ifconfig br1 192.168.1.2/24
+
 
 
 
