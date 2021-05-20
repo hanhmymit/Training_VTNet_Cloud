@@ -66,10 +66,14 @@ VXLAN frame format:
 ```sudo ip link set dev br1 up```  
 ![image](https://user-images.githubusercontent.com/46991949/118910589-ef66a000-b94e-11eb-870e-ed037da975c7.png)
 
-4. Trên host1 tạo chế độ mạng bridge cho vswitch br1 và card mạng ens33  
-```sudo ovs-vsctl add-port br1 ens33```  
-```sudo ifconfig ens33 0 && ifconfig br1 192.168.1.2/24
+4. Trên host1 tạo chế độ mạng bridge cho vswitch br1 và card mạng enp0s3 
+![image](https://user-images.githubusercontent.com/46991949/118913933-9568d900-b954-11eb-80cd-700fd9276ba9.png)
+ 
+```sudo ovs-vsctl add-port br1 enp0s3```  
+```sudo ifconfig enp0s3 0 && ifconfig br1 192.168.1.2/24```
 
-
+5. Trên host2 tạo chế độ mạng bridge cho vswitch br1 và card mạng enp0s3
+```ovs-vsctl add-port br1 enp0s3```   
+ ```ifconfig enp0s3 0 && ifconfig br1 192.168.1.227/24
 
 
