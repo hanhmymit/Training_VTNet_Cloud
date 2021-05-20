@@ -24,7 +24,29 @@ VXLAN frame format:
 
     Outer IP Header: Cung cấp địa chỉ IP nguồn của VTEP nguồn kết nối với VM bên trong. Địa chỉ IP outer đích là địa chỉ IP của VTEP nhận frame.
 
-    Outer Ethernet Header: cung cấp địa chỉ MAC nguồn của VTEP có khung frame ban đầu. Địa chỉ MAC đích là địa chỉ của hop tiếp theo được định tuyến bởi VTEP.
+    Outer Ethernet Header: cung cấp địa chỉ MAC nguồn của VTEP có khung frame ban đầu. Địa chỉ MAC đích là địa chỉ của hop tiếp theo được định tuyến bởi VTEP.  
+    
+**Chuẩn bị**  
+1. Topology:  
+* Host 1: 192.168.30.130
+    vm1(cirros0): 10.0.0.101/24
+    vswitch br0: 10.0.0.1
+    vswitch br1: 192.168.30.130  
+    
+* Host 2: 192.168.30.184
+    vm2(cirros1): 10.0.0.102/24
+    vswitch br0: 10.0.0.2
+    vswitch br1: 192.168.30.184  
+
+2. Mô tả:
+* Dưới đây mình sẽ thực hiện 1 bài lab sử dụng vmware để chạy 2 máy ảo host1, host2 đóng vai trò như các node vật lí trong thực tế.
+* Trên 2 host này, sẽ được cài hệ điều hành Ubuntu Server 16.04, cài sẵn các phần mềm Open vSwitch, KVM với QEMU, libvirt-bin để tạo các vm. 2 host này đều sủ dụng card mạng ens33 ( coi như là card mạng vật lý).
+* Dùng wireshark để bắt và phân tích gói tin VXLAN
+
+3. Cấu hình:
+* Tạo 2 vSwitch br0 và br1 trên cả 2 host.
+* Cấu hình chế độ mạng bridge cho vSwitch br1 và card mạng ens33 trên cả 2 host.
+* Trên HOST 1, tạo VM1(cirros1) kết nối với vSwitch br0. Trên HOST 2 tạo VM2(cirros2) kết nối với vSwitch br0.
 
 **Step 1: Create 2 Linux virtual machines and install openvswitch**  
 1. Create 2 Linux virtual machines 
