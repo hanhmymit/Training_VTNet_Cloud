@@ -70,7 +70,7 @@ VXLAN frame format:
 ```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.2/24```  
 *Note: Nếu muốn xóa một cổng để khôi phục lại có thể dùng: sudo ovs-vsctl del-port br1 enp0s3*  
 
-5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3
+5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3  
 ```sudo ovs-vsctl add-port br0 enp0s3```   
 ```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.227/24```  
 
