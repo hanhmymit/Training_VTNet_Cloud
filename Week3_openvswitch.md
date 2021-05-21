@@ -27,13 +27,15 @@ VXLAN frame format:
     Outer Ethernet Header: cung cấp địa chỉ MAC nguồn của VTEP có khung frame ban đầu. Địa chỉ MAC đích là địa chỉ của hop tiếp theo được định tuyến bởi VTEP.  
     
 **Chuẩn bị**  
+![image](https://user-images.githubusercontent.com/46991949/119123072-6720f180-ba59-11eb-8f9d-3effbc3c2d92.png)
+
 1. Topology:  
 * Host 1: 192.168.1.2   
-    vswitch br1: 10.0.0.1  
+    vswitch br1: 10.0.1.10  
     vswitch br0: 192.168.1.2    
     
 * Host 2: 192.168.1.227   
-    vswitch br1: 10.0.0.2  
+    vswitch br1: 10.0.1.11  
     vswitch br0: 192.168.1.227    
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
