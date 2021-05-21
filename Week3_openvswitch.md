@@ -47,45 +47,43 @@ VXLAN frame format:
 3. Cấu hình:
 * Tạo 2 vSwitch br0 và br1 trên cả 2 host.
 * Cấu hình chế độ mạng bridge cho vSwitch br1 và card mạng ens33 trên cả 2 host.
-* Trên HOST 1, tạo VM1(cirros1) kết nối với vSwitch br0. Trên HOST 2 tạo VM2(cirros2) kết nối với vSwitch br0.
+* Trên HOST 1, tạo VM1(cirros1) kết nối với vSwitch br0. Trên HOST 2 tạo VM2(cirros2) kết nối với vSwitch br0.  
 
-**Step 1: Create 2 Linux virtual machines and install openvswitch**  
-
-1. Open vSwitch và KVM trên cả 2 Host  
+**Step 1. Open vSwitch và KVM trên cả 2 Host**    
 * ```sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils```  
 * ```sudo apt-get install openvswitch-switch```  
 * ```libvirtd --version```  
 ![image](https://user-images.githubusercontent.com/46991949/118910290-6c454a00-b94e-11eb-9f08-d89426584f46.png)  
 
-2. Tạo 2 vswitch br0 và br1 trên cả 2 Host  
+**Step 2. Tạo 2 vswitch br0 và br1 trên cả 2 Host**  
 ```sudo ovs-vsctl add-br br0```  
 ```sudo ovs-vsctl add-br br1```  
 
-3. Bật 2 vswitch trên cả 2 Host  
+**Step 3. Bật 2 vswitch trên cả 2 Host**  
 ```sudo ip link set dev br0 up```  
 ```sudo ip link set dev br1 up```  
 
-4. Trên host1 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3 
+**Step 4. Trên host1 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3** 
 ![image](https://user-images.githubusercontent.com/46991949/118913933-9568d900-b954-11eb-80cd-700fd9276ba9.png)
  
 ```sudo ovs-vsctl add-port br0 enp0s3```  
 ```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.2/24```  
 *Note: Nếu muốn xóa một cổng để khôi phục lại có thể dùng: sudo ovs-vsctl del-port br1 enp0s3*  
 
-5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3  
+**Step 5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3**  
 ```sudo ovs-vsctl add-port br0 enp0s3```   
 ```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.227/24```  
 
-6. Add lại route trên cả 2 host  
+**Step 6. Add lại route trên cả 2 host**  
 ```sudo route add default gw 192.168.1.1 br0```  
 
-7. Cấu hình IP cho br1 trên Host
+**Step 7. Cấu hình IP cho br1 trên Host**
 * Trên host1
 ```sudo ifconfig br1 10.0.1.10/24```
 * Trên host2
 ```sudo ifconfig br1 10.0.1.11/24```  
 
-8. Cấu hình VXLAN tunnel cho vswitch br0 trên host
+**Step 8. Cấu hình VXLAN tunnel cho vswitch br0 trên host**
 * Trên host1
 ```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.227```  
 ![image](https://user-images.githubusercontent.com/46991949/119121314-743ce100-ba57-11eb-8c8f-531488305f0b.png)
@@ -100,13 +98,23 @@ VXLAN frame format:
 *Cấu hình mạng lúc này*  
 ![image](https://user-images.githubusercontent.com/46991949/119121469-a9e1ca00-ba57-11eb-9894-d13e47d9d9af.png)
 
-9. Check connection to other node via VXLAN with Ping 
+**Step 9. Check connection to other node via VXLAN with Ping** 
 
 Từ host1. Sử dụng câu lệnh ```ping -I br1 10.0.1.11``` để ping sang host2  
 -----> ping failed nhưng chưa fix được ạ *.*  
 
+**Ưu nhược điểm của việc sử dụng mạng Vxlan trong trung tâm dữ liệu**  
 
+1. Ưu điểm:
+* Tăng khả năng mở rộng: Trên thực tế, VLAN chỉ cung cấp tối đa 4095 phân đoạn khả thi nhưng VXLAN có thể đạt tới 16 triệu với VNI 24bit.
+* Tăng khả năng di chuyển: Các máy đó có thể được di chuyển từ một mạng con trên một máy chủ sang một máy chủ khác có mạng con khác trong khi IP của nó vẫn không thay đổi.
+* Đáp ứng được nhu cầu xử lý lưu lương dữ liệu lớn trong môi trường Datacenter/Cloud mà vẫn giữ được đăc tính của VLAN truyền thống.
+* Tận dụng tốt hơn các kết nối mạng khả dụng trong cơ sở hạ tầng bên dưới: Các gói tin VXLAN được truyền qua các lớp mạng dựa vào thông tin trong Header cùng giao thức định tuyến của Lớp 3 để sử dụng tất cả các kết nối sẵn có.
+* Giảm độ trễ truyền tải gói tin trong miền VxLAN.
 
+2. Nhược điểm  
+* Phức tạp về việc cấu hình và quản lý.
+* 
 
  
 
