@@ -108,9 +108,7 @@ VXLAN frame format:
 * ```virsh net-autostart ovs0```  
 ![image](https://user-images.githubusercontent.com/46991949/118946882-0625ea80-b981-11eb-9df2-5af325738d60.png)  
 
-10. Create Virtual machines testvm and attach network ovs0 vừa tạo ở trên  
-* Trên host1  
-```sudo virt-install --name=testvm1 --ram=512 --vcpus=1 --cdrom=/root/ubuntu-16.04.2-server-amd64.iso --os-type=linux --os-variant=ubuntu16.04 --network network:ovs0 --disk path=/var/lib/libvirt/images/testvm2.dsk,size=8```  
+10. Từ host 1 ping 10.0.0.2 sang host 2
 
 
  
