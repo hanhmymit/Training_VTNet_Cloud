@@ -29,12 +29,12 @@ VXLAN frame format:
 **Chuẩn bị**  
 1. Topology:  
 * Host 1: 192.168.1.2   
-    vswitch br0: 10.0.0.1  
-    vswitch br1: 192.168.1.2    
+    vswitch br1: 10.0.0.1  
+    vswitch br0: 192.168.1.2    
     
 * Host 2: 192.168.1.227   
-    vswitch br0: 10.0.0.2  
-    vswitch br1: 192.168.1.227    
+    vswitch br1: 10.0.0.2  
+    vswitch br0: 192.168.1.227    
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
 2. Mô tả:
@@ -62,51 +62,48 @@ VXLAN frame format:
 3. Bật 2 vswitch trên cả 2 Host  
 ```sudo ip link set dev br0 up```  
 ```sudo ip link set dev br1 up```  
-![image](https://user-images.githubusercontent.com/46991949/118910589-ef66a000-b94e-11eb-870e-ed037da975c7.png)
 
-4. Trên host1 tạo chế độ mạng bridge cho vswitch br1 và card mạng enp0s3 
+4. Trên host1 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3 
 ![image](https://user-images.githubusercontent.com/46991949/118913933-9568d900-b954-11eb-80cd-700fd9276ba9.png)
  
-```sudo ovs-vsctl add-port br1 enp0s3```  
-```sudo ifconfig enp0s3 0 && sudo ifconfig br1 192.168.1.2/24```  
+```sudo ovs-vsctl add-port br0 enp0s3```  
+```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.2/24```  
 *Note: Nếu muốn xóa một cổng để khôi phục lại có thể dùng: sudo ovs-vsctl del-port br1 enp0s3*  
 
-5. Trên host2 tạo chế độ mạng bridge cho vswitch br1 và card mạng enp0s3
-```sudo ovs-vsctl add-port br1 enp0s3```   
-```sudo ifconfig enp0s3 0 && sudo ifconfig br1 192.168.1.227/24```  
+5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3
+```sudo ovs-vsctl add-port br0 enp0s3```   
+```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.227/24```  
 
 6. Add lại route trên cả 2 host  
-```sudo route add default gw 192.168.1.1 br1```  
+```sudo route add default gw 192.168.1.1 br0```  
 
-7. Cấu hình IP cho br0 trên Host
+7. Cấu hình IP cho br1 trên Host
 * Trên host1
-```sudo ifconfig br0 10.0.0.1/24```
+```sudo ifconfig br1 10.0.1.10/24```
 * Trên host2
-```sudo ifconfig br0 10.0.0.2/24```  
+```sudo ifconfig br1 10.0.1.11/24```  
 
 8. Cấu hình VXLAN tunnel cho vswitch br0 trên host
 * Trên host1
-```sudo ovs-vsctl add-port br0 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.227```  
+```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.227```  
+![image](https://user-images.githubusercontent.com/46991949/119121314-743ce100-ba57-11eb-8c8f-531488305f0b.png)
+
+*Cấu hính mạng lúc này*  
+![image](https://user-images.githubusercontent.com/46991949/119121377-89b20b00-ba57-11eb-8d92-df0931144055.png)
+
 * Trên host2  
-```sudo ovs-vsctl add-port br0 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.2```  
-![image](https://user-images.githubusercontent.com/46991949/118945988-2e611980-b980-11eb-869a-2e5e6d67962a.png)
+```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.2```  
+![image](https://user-images.githubusercontent.com/46991949/119121425-99315400-ba57-11eb-8137-6312aedea8cc.png)
 
-9. Tạo mạng ovs0 với vswitch ovs1 trên cả 2 host   
-* nano ovs0.xml  
-```<network>
- 	<name>ovs0</name>
- 	<forward mode='bridge'/>
- 	<bridge name='br0'/>
- 	<virtualport type='openvswitch'/>
- </network>
- ```  
-* ```sudo virsh net-define ovs0.xml```    
-![image](https://user-images.githubusercontent.com/46991949/118946656-cced7a80-b980-11eb-8cb8-9569a056d050.png)
-*```virsh net-start ovs0```  
-* ```virsh net-autostart ovs0```  
-![image](https://user-images.githubusercontent.com/46991949/118946882-0625ea80-b981-11eb-9df2-5af325738d60.png)  
+*Cấu hình mạng lúc này*  
+![image](https://user-images.githubusercontent.com/46991949/119121469-a9e1ca00-ba57-11eb-9894-d13e47d9d9af.png)
 
-10. Từ host 1 ping 10.0.0.2 sang host 2
+9. Check connection to other node via VXLAN with Ping 
+
+Từ host1. Sử dụng câu lệnh ```ping -I br1 10.0.1.11``` để ping sang host2  
+-----> ping failed nhưng chưa fix được ạ *.*  
+
+
 
 
  
