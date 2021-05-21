@@ -70,21 +70,21 @@ VXLAN frame format:
 ![image](https://user-images.githubusercontent.com/46991949/118913933-9568d900-b954-11eb-80cd-700fd9276ba9.png)
  
 ```sudo ovs-vsctl add-port br1 enp0s3```  
-```sudo ifconfig enp0s3 0 && sudo ifconfig br1 192.168.1.227/24```  
+```sudo ifconfig enp0s3 0 && sudo ifconfig br1 192.168.1.2/24```  
 *Note: Nếu muốn xóa một cổng để khôi phục lại có thể dùng: sudo ovs-vsctl del-port br1 enp0s3*  
 
 5. Trên host2 tạo chế độ mạng bridge cho vswitch br1 và card mạng enp0s3
 ```sudo ovs-vsctl add-port br1 enp0s3```   
-```sudo ifconfig enp0s3 0 && sudo ifconfig br1 192.168.1.2/24```  
+```sudo ifconfig enp0s3 0 && sudo ifconfig br1 192.168.1.227/24```  
 
 6. Add lại route trên cả 2 host  
 ```sudo route add default gw 192.168.1.1 br1```  
 
 7. Cấu hình IP cho br0 trên Host
 * Trên host1
-```sudo ifconfig br0 10.0.0.10 netmask 255.255.255.0```
+```sudo ifconfig br0 10.0.0.1/24```
 * Trên host2
-```sudo ifconfig br0 10.0.0.11 netmask 255.255.255.0```  
+```sudo ifconfig br0 10.0.0.2/24```  
 
 8. Cấu hình VXLAN tunnel cho vswitch br0 trên host
 * Trên host1
