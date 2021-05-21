@@ -28,13 +28,11 @@ VXLAN frame format:
     
 **Chuẩn bị**  
 1. Topology:  
-* Host 1: 192.168.1.2  
-    vm1(cirros0): 10.0.0.101/24  
+* Host 1: 192.168.1.2   
     vswitch br0: 10.0.0.1  
     vswitch br1: 192.168.1.2    
     
-* Host 2: 192.168.1.227  
-    vm2(cirros1): 10.0.0.102/24  
+* Host 2: 192.168.1.227   
     vswitch br0: 10.0.0.2  
     vswitch br1: 192.168.1.227    
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
