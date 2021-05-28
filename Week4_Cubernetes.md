@@ -43,9 +43,10 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 **Step 5: Khởi động Minikube**  
 
 ```minikube start``` 
-*Note:Nếu gặp lỗi như sau:
-![image](https://user-images.githubusercontent.com/46991949/119990283-5856b380-bff2-11eb-99ad-a88c663c1afc.png)
-*Thì có thế fix bằng cách bỏ qua kiểm tra CPU (kể từ v1.5.2) bằng cách sử dụng```  
-```minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1```  
+*Note:Nếu gặp lỗi như sau:  
+![image](https://user-images.githubusercontent.com/46991949/119990283-5856b380-bff2-11eb-99ad-a88c663c1afc.png)  
+*Thì có thế fix bằng cách bỏ qua kiểm tra CPU (kể từ v1.5.2) bằng cách sử dụng```    
+```minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1```   
+
 
 
