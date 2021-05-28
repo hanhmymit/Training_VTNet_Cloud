@@ -44,10 +44,10 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 
 **Step 5: Khởi động Minikube**  
 
-```minikube start``` 
+```minikube start```   
 *Note:Nếu gặp lỗi như sau:  
 ![image](https://user-images.githubusercontent.com/46991949/119990283-5856b380-bff2-11eb-99ad-a88c663c1afc.png)  
-*Thì có thế fix bằng cách bỏ qua kiểm tra CPU (kể từ v1.5.2) bằng cách sử dụng```    
+*Thì có thế fix bằng cách bỏ qua kiểm tra CPU (kể từ v1.5.2) bằng cách sử dụng      
 ```minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1
 ```   
 ## B: Deploy a WordPress blog on Minikube with persistent data ##  
@@ -60,14 +60,14 @@ Tạo thư mục /wordpress-minikube
 
 Lưu ý rằng đó 1f2d1e2e67dflà mật khẩu của bạn. Hãy thoải mái sử dụng bất kỳ mật khẩu nào bạn chọn. Đầu ra của lệnh trên sẽ là mật khẩu được mã hóa base64 của bạn . Sao chép nó.
 Bây giờ, hãy tạo một tệp secrets.ymlvà dán mật khẩu được mã hóa base64 của bạn vào dòng cuối cùng.  
-```apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-pass
-type: Opaque
-data:
-  password:
-  ```  
+  ```apiVersion: v1
+  kind: Secret
+  metadata:
+    name: mysql-pass
+  type: Opaque
+  data:
+    password:
+```  
 Thực hiện lệnh này để tạo bí mật  
 ```kubectl apply -f secret.yml```  
 
