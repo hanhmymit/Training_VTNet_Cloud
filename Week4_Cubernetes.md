@@ -50,6 +50,14 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 *Thì có thế fix bằng cách bỏ qua kiểm tra CPU (kể từ v1.5.2) bằng cách sử dụng      
 ```minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1```  
 
+*Hoặc bạn gặp phải lỗi ```Exiting due to GUEST_MISSING_CONNTRACK: Sorry, Kubernetes 1.20.2 requires conntrack to be installed in root's path```  
+*Thì có thể sử dụng 2 câu laanhj sau để fix*  
+```sudo apt-get install -y conntrack
+sudo -E minikube start --driver=none
+```  
+Output  
+![image](https://user-images.githubusercontent.com/46991949/120010069-eb014d80-c006-11eb-9f09-93c3f6e8ef08.png)
+
 ## B: Deploy a WordPress blog on Minikube with persistent data ##  
 
 Tạo thư mục /wordpress-minikube
