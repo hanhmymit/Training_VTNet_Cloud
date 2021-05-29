@@ -52,9 +52,8 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 
 *Hoặc bạn gặp phải lỗi ```Exiting due to GUEST_MISSING_CONNTRACK: Sorry, Kubernetes 1.20.2 requires conntrack to be installed in root's path```  
 *Thì có thể sử dụng 2 câu laanhj sau để fix*  
-```sudo apt-get install -y conntrack
-sudo -E minikube start --driver=none
-```  
+```sudo apt-get install -y conntrack```  
+```sudo -E minikube start --driver=none```  
 Output  
 ![image](https://user-images.githubusercontent.com/46991949/120010069-eb014d80-c006-11eb-9f09-93c3f6e8ef08.png)
 
