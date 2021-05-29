@@ -59,7 +59,7 @@ Output
 
 ## B: Deploy a WordPress blog on Minikube with persistent data ##  
 
-Tạo thư mục /wordpress-minikube
+Tạo thư mục /wordpress-minikube  
 **Step 1: Tạo mật khẩu bí mật Kubernetes**  
 
 1. Tạo một bản trình bày base64 cho mật khẩu của bạn. Lệnh dưới đây sẽ làm điều đó cho bạn  
@@ -78,4 +78,169 @@ Bây giờ, hãy tạo một tệp secrets.ymlvà dán mật khẩu được mã
 Thực hiện lệnh này để tạo bí mật  
 ```kubectl apply -f secret.yml```  
 
+**Step 2: Thực hiện deploy wordpress**  
+
+1. Tạo file wordpress-deployment.yaml  
+```apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: wordpress
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wp-pv-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: frontend
+    spec:
+      containers:
+      - image: wordpress:5.4.1-apache
+        name: wordpress
+        imagePullPolicy: Always
+        
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: wordpress-mysql
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+        - containerPort: 80
+          name: wordpress
+        volumeMounts:
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: wp-pv-claim
+  ```  
+          
+2. Tạo file mysql-deployment.yaml  
+```apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-mysql
+  labels:
+    app: wordpress
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: wordpress
+    tier: mysql
+  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: wordpress-mysql
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+              imagePullPolicy: Always
+        ports:
+        - containerPort: 3306
+          name: mysql
+        readinessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+  ```  
+  3. Lần lượt chạy các lệnh  
+  ```sudo kubectl apply -f mysql-deployment.yaml```  
+  Output  
+  ``` service/wordpress-mysql created```  
+  ```persistentvolumeclaim/mysql-pv-claim created```  
+  ```deployment.apps/wordpress-mysql created```  
+  Tiếp tục chạy    
+  ```kubectl apply -f wordpress-deployment.yaml```  
+  Output    
+  ```service/wordpress created```  
+  ```persistentvolumeclaim/wp-pv-claim created```  
+  ```deployment.apps/wordpress created```  
+  
 
