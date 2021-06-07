@@ -132,5 +132,23 @@ Tất cả các mật khẩu đã tạo sẽ được điền vào /etc/kolla/pa
 
 1. Khởi động cấu hình localhost của bạn trước khi triển khai vùng chứa bằng bootstrap-serverslệnh con  
 ```kolla-ansible -i all-in-one bootstrap-servers```  
-![image](https://user-images.githubusercontent.com/46991949/120992840-30fba580-c7ad-11eb-927c-f502e7855c0c.png)
+![image](https://user-images.githubusercontent.com/46991949/120992840-30fba580-c7ad-11eb-927c-f502e7855c0c.png)  
+2. Thực hiện kiểm tra trước khi triển khai cho các máy chủ  
+```kolla-ansible -i all-in-one prechecks```  
+![image](https://user-images.githubusercontent.com/46991949/120998267-2099f980-c7b2-11eb-9fbb-e422f28a30a5.png)
+
+3. Kéo hình ảnh vào máy ảo  
+```kolla-ansible -i all-in-one pull```    
+![image](https://user-images.githubusercontent.com/46991949/120998415-46270300-c7b2-11eb-8a96-4d396df9c84f.png)  
+4. Cuối cùng tiến hành triển khai OpenStack thực tế  
+```kolla-ansible -i all-in-one deploy```  
+![image](https://user-images.githubusercontent.com/46991949/120998530-6060e100-c7b2-11eb-8050-6671c62344ba.png)
+5. Tạo tài khoản người dùng  
+Tài khoản:
+Người dùng: admin
+Mật khẩu:
+Chạy:
+```cat /etc/kolla/passwords.yml | grep -i keystone_admin_password```  
+![image](https://user-images.githubusercontent.com/46991949/120999917-dca7f400-c7b3-11eb-89e5-290c720a080d.png)
+
 
