@@ -36,7 +36,11 @@ Cài đặt pip phiên bản mới
 ```cp path/to/venv/share/kolla-ansible/ansible/inventory/* .```  
 4. Cài đặt Openstack CLI (khuyến nghị)  
 ```pip install python-openstackclient python-glanceclient python-neutronclient```  
-5. Cấu hình mạng  
+5. Kiểm tra kết quả kết nối
+```ansible -i all-in-one all -m ping```  
+![image](https://user-images.githubusercontent.com/46991949/120989396-b3826600-c7a9-11eb-94ae-ec32b371b834.png)
+
+7. Cấu hình mạng  
 ```nano /etc/kolla/globals.yml```  
 Trong globals.yml gõ  
 ```kolla_internal_vip_address: "192.168.0.109"
