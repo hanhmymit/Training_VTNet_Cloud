@@ -108,23 +108,20 @@ forks=100
 4. Cấu hình mạng  
 ```nano /etc/kolla/globals.yml``` 
 Trong file globals.yml  
-```config_strategy: "COPY_ALWAYS"
-kolla_base_distro: "ubuntu"
-kolla_install_type: "binary"
-openstack_release: "ussuri"
-kolla_internal_vip_address: "192.168.0.114"
-kolla_internal_fqdn: "{{ kolla-openstack.kifarunix-demo.com }}"
-kolla_external_vip_address: "{{ kolla_internal_vip_address }}"
-kolla_external_fqdn: "{{ kolla_internal_fqdn }}"
-network_interface: "enp0s10"
-neutron_external_interface: "enp0s8"
-neutron_plugin_agent: "openvswitch"
-enable_haproxy: "yes"
-enable_cinder: "yes"
-enable_cinder_backend_lvm: "yes"
-keystone_token_provider: 'fernet'
-cinder_volume_group: "openstack_cinder"
+```kolla_base_distro: "ubuntu"
+kolla_install_type: "source"
+
+network_interface: enp0s8
+neutron_external_interface: enp0s3
+kolla_internal_vip_address: 192.168.0.110
+
 nova_compute_virt_type: "qemu"
+
+enable_haproxy: "no"
+
+enable_cinder: "yes"
+enable_cinder_backup: "no"
+enable_cinder_backend_lvm: "yes"
 ```  
 5. Tạo mật khẩu Kolla  
 passwords.yml Tệp cấu hình Kolla lưu trữ các mật khẩu dịch vụ OpenStack khác nhau. Bạn có thể tự động tạo mật khẩu bằng cách sử dụng Kolla-ansible kolla-genpwdtrong môi trường ảo của mình.  
@@ -135,4 +132,5 @@ Tất cả các mật khẩu đã tạo sẽ được điền vào /etc/kolla/pa
 
 1. Khởi động cấu hình localhost của bạn trước khi triển khai vùng chứa bằng bootstrap-serverslệnh con  
 ```kolla-ansible -i all-in-one bootstrap-servers```  
+![image](https://user-images.githubusercontent.com/46991949/120992840-30fba580-c7ad-11eb-927c-f502e7855c0c.png)
 
