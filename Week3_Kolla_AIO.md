@@ -18,27 +18,25 @@ sudo apt install python3-dev libffi-dev gcc libssl-dev
 3. Tạo môi trường ảo và kích hoạt môi trường  
 ```python3 -m venv path/to/venv```    
 ```source path/to/venv/bin/activate```  
-2. Cài đặt ansible  
+4. Cài đặt ansible  
 Cài đặt pip phiên bản mới  
 ```pip install -U pip```  
-```apt-get install ansible```  
-3. Cài đặt docker  
-```apt-get update -qq```    
-```apt-get install -y -qq --no-install-recommends docker-ce```  
-```curl -sSL https://get.docker.io | bash```  
-7. Cuối cùng, cài đặt kolla  
+```apt-get install ansible```    
+5. Cuối cùng, cài đặt kolla  
 ```pip install kolla-ansible```  
 
-*Output*  
-![image](https://user-images.githubusercontent.com/46991949/119678569-d471bf80-be69-11eb-9e9f-356f55b6d0be.png)  
+**Step 2: Cấu hình kolla**  
 
-**Step 2: Cấu hiinhf kolla**  
-
-1. Hãy sao chép cấu hình mẫu sau  
-```cp -r /usr/local/share/kolla-ansible/etc_examples/kolla /etc/kolla/
-cp /usr/local/share/kolla-ansible/ansible/inventory/all-in-one .
-```  
-2. Cấu hình mạng  
+1. Tạo thư mục / etc / kolla  
+```sudo mkdir -p /etc/kolla```  
+```sudo chown $USER:$USER /etc/kolla```  
+2. Sao chép perfals.yml và mật khẩu.yml vào thư mục / etc / kolla  
+```cp -r path/to/venv/share/kolla-ansible/etc_examples/kolla/* /etc/kolla```  
+3. Sao chép tất cả trong một và tệp khoảng không quảng cáo nhiều nút vào thư mục hiện tại  
+```cp path/to/venv/share/kolla-ansible/ansible/inventory/* .```  
+4. Cài đặt Openstack CLI (khuyến nghị)  
+```pip install python-openstackclient python-glanceclient python-neutronclient```  
+5. Cấu hình mạng  
 ```nano /etc/kolla/globals.yml```  
 Trong globals.yml gõ  
 ```kolla_internal_vip_address: "192.168.0.109"
