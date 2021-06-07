@@ -18,9 +18,9 @@ sudo apt install python3-dev libffi-dev gcc libssl-dev
 3. Tạo môi trường ảo và kích hoạt môi trường  
 ```python3 -m venv path/to/venv```    
 ```source path/to/venv/bin/activate```  
-2. Cài đặt ansible 
-Cài đặt pip phiên bản mới
-```pip install -U pip```
+2. Cài đặt ansible  
+Cài đặt pip phiên bản mới  
+```pip install -U pip```  
 ```apt-get install ansible```  
 3. Cài đặt docker  
 ```apt-get update -qq```    
