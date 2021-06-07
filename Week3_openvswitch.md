@@ -32,11 +32,11 @@ VXLAN frame format:
 1. Topology:  
 * Host 1: 192.168.1.2   
     vswitch br1: 10.0.1.10  
-    vswitch br0: 192.168.1.2    
+    vswitch br0: 192.168.1.2    enp0s3
     
 * Host 2: 192.168.1.227   
     vswitch br1: 10.0.1.11  
-    vswitch br0: 192.168.1.227    
+    vswitch br0: 192.168.1.227    enp0s3
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
 2. Mô tả:
@@ -50,8 +50,9 @@ VXLAN frame format:
 * Trên HOST 1, tạo VM1(cirros1) kết nối với vSwitch br0. Trên HOST 2 tạo VM2(cirros2) kết nối với vSwitch br0.  
 
 **Step 1. Open vSwitch và KVM trên cả 2 Host**    
-* ```sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils```  
-* ```sudo apt-get install openvswitch-switch```  
+* ```sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils```
+* ```sudo apt install net-tools```  
+* ```sudo apt-get install openvswitch-switch -y```  
 * ```libvirtd --version```  
 ![image](https://user-images.githubusercontent.com/46991949/118910290-6c454a00-b94e-11eb-9f08-d89426584f46.png)  
 
@@ -72,16 +73,13 @@ VXLAN frame format:
 
 **Step 5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3**  
 ```sudo ovs-vsctl add-port br0 enp0s3```   
-```sudo ifconfig enp0s3 0 && sudo ifconfig br0 192.168.1.227/24```  
+```sudo ip a flush enp0s3 && sudo ifconfig br0 192.168.1.2/24```  
 
-**Step 6. Add lại route trên cả 2 host**  
-```sudo route add default gw 192.168.1.1 br0```  
-
-**Step 7. Cấu hình IP cho br1 trên Host**
+**Step 6. Cấu hình IP cho br1 trên Host**
 * Trên host1
-```sudo ifconfig br1 10.0.1.10/24```
+```sudo ifconfig br1 10.1.1.10/24```
 * Trên host2
-```sudo ifconfig br1 10.0.1.11/24```  
+```sudo ifconfig br1 10.1.1.11/24```  
 
 **Step 8. Cấu hình VXLAN tunnel cho vswitch br0 trên host**
 * Trên host1
