@@ -116,7 +116,10 @@ Từ host1. Sử dụng câu lệnh ```ping -I br1 10.1.1.11``` để ping sang 
 
 2. Nhược điểm  
 * Phức tạp về việc cấu hình và quản lý.
-* 
+* Gói tin được đóng gói thêm nhiều layer, kích thước tăng lên gây giảm hiệu năng mạng:  tiêu tốn thêm tài nguyên xử lý, giảm băng thông truyền tải
+* Cấu hình phức tạp hơn mạng vlan
+* Troubleshoot khó hơn do tính transparent
+* Khó tích hợp với các thiết bị mạng truyền thống không hỗ trợ vxlan
 
  
 
