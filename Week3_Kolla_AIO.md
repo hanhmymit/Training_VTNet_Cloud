@@ -11,29 +11,21 @@
 
 1. Cài đặt PIP  
 ```apt-get update
-apt-get install python-pip
-pip install -U pip
-apt-get install python-dev libffi-dev gcc libssl-dev  
+sudo apt install python3-dev libffi-dev gcc libssl-dev  
 ```  
-2. Cài đặt ansible  
+2. Cài đặt môi trường ảo
+```sudo apt install python3-venv```
+3. Tạo môi trường ảo và kích hoạt môi trường  
+```python3 -m venv path/to/venv```    
+```source path/to/venv/bin/activate```  
+2. Cài đặt ansible 
+Cài đặt pip phiên bản mới
+```pip install -U pip```
 ```apt-get install ansible```  
 3. Cài đặt docker  
 ```apt-get update -qq```    
 ```apt-get install -y -qq --no-install-recommends docker-ce```  
-```curl -sSL https://get.docker.io | bash```
-4. Tạo một cấu hình cho systemd cho Kolla và Docker  
-```mkdir -p /etc/systemd/system/docker.service.d
-tee /etc/systemd/system/docker.service.d/kolla.conf <<-'EOF'
-[Service]
-MountFlags=shared
-EOF  
-```  
-5. Khởi động lại daemon để áp dụng  
-```systemctl daemon-reload
-systemctl restart docker
-```  
-6. Cài đặt docker-py  
-```pip install -U docker-py```  
+```curl -sSL https://get.docker.io | bash```  
 7. Cuối cùng, cài đặt kolla  
 ```pip install kolla-ansible```  
 
