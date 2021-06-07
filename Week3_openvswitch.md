@@ -100,8 +100,9 @@ VXLAN frame format:
 
 **Step 9. Check connection to other node via VXLAN with Ping** 
 
-Từ host1. Sử dụng câu lệnh ```ping -I br1 10.0.1.11``` để ping sang host2  
------> ping failed nhưng chưa fix được ạ *.*  
+Từ host1. Sử dụng câu lệnh ```ping -I br1 10.1.1.11``` để ping sang host2  
+![image](https://user-images.githubusercontent.com/46991949/120956572-06462880-c77e-11eb-85e4-dea4e422825e.png)
+
 
 **Ưu nhược điểm của việc sử dụng mạng Vxlan trong trung tâm dữ liệu**  
 
