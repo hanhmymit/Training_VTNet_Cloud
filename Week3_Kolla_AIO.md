@@ -7,64 +7,6 @@
 * Bridgr Adapter: enp0s8 : 192.168.0.110
 * Host-only Adapter: enp0s9: 192.168.56.101
 
-**Step 1: Cài đặt Kolla**  
-
-1. Cài đặt PIP  
-```apt-get update
-sudo apt install python3-dev libffi-dev gcc libssl-dev  
-```  
-2. Cài đặt môi trường ảo
-```sudo apt install python3-venv```
-3. Tạo môi trường ảo và kích hoạt môi trường  
-```python3 -m venv path/to/venv```    
-```source path/to/venv/bin/activate```  
-4. Cài đặt ansible  
-Cài đặt pip phiên bản mới  
-```pip install -U pip```  
-```apt-get install ansible```    
-5. Cuối cùng, cài đặt kolla  
-```pip install kolla-ansible```  
-
-**Step 2: Cấu hình kolla**  
-
-1. Tạo thư mục / etc / kolla  
-```sudo mkdir -p /etc/kolla```  
-```sudo chown $USER:$USER /etc/kolla```  
-2. Sao chép perfals.yml và mật khẩu.yml vào thư mục / etc / kolla  
-```cp -r path/to/venv/share/kolla-ansible/etc_examples/kolla/* /etc/kolla```  
-3. Sao chép tất cả trong một và tệp khoảng không quảng cáo nhiều nút vào thư mục hiện tại  
-```cp path/to/venv/share/kolla-ansible/ansible/inventory/* .```  
-4. Cài đặt Openstack CLI (khuyến nghị)  
-```pip install python-openstackclient python-glanceclient python-neutronclient```  
-5. Kiểm tra kết quả kết nối
-```ansible -i all-in-one all -m ping```  
-![image](https://user-images.githubusercontent.com/46991949/120989396-b3826600-c7a9-11eb-94ae-ec32b371b834.png)
-
-7. Cấu hình mạng  
-```nano /etc/kolla/globals.yml```  
-Trong globals.yml gõ  
-```kolla_internal_vip_address: "192.168.0.109"
-network_interface: "enp0s9"
-neutron_external_interface: "enp0s8"
-designate_backend: "bind9"
-designate_ns_record: "sample.openstack.org"
-tempest_image_id:
-tempest_flavor_ref_id:
-tempest_public_network_id:
-tempest_floating_network_name:  
-```  
-Sau đó tạo tất cả mật khẩu để triển khai  
-```kolla-genpwd```  
-3. Khởi động môi trường  
-```kolla-ansible -i all-in-one bootstrap-servers```  
-*Output*  
-![image](https://user-images.githubusercontent.com/46991949/119752153-a7072f00-bec6-11eb-82ca-01579ba8c4cd.png)
-Để có thể lấy tất cả các hình ảnh mà chúng ta cần cho các vùng chứa có thể kiểm soát được  
-```kolla-ansible pull```  
-Ban đầu, chúng ta sẽ gặp lỗi full  
-![image](https://user-images.githubusercontent.com/46991949/119752269-e5045300-bec6-11eb-9b43-6dc6bcc2482a.png)
-Sau đó chúng ta sẽ phải cập nhật cấu hình để bao gồm một phiên bản cụ thể của thẻ ( 4.0.0 )
-
 **Step 1: Cài đặt các gói yêu cầu bắt buộc trên ubuntu 18.04  
 
 1. Cập nhật và nâng cấp các gói  
