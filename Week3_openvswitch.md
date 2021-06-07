@@ -102,6 +102,7 @@ VXLAN frame format:
 
 Từ host1. Sử dụng câu lệnh ```ping -I br1 10.1.1.11``` để ping sang host2  
 ![image](https://user-images.githubusercontent.com/46991949/120956572-06462880-c77e-11eb-85e4-dea4e422825e.png)
+![image](https://user-images.githubusercontent.com/46991949/120958671-66d76480-c782-11eb-80c4-1622e0c139a3.png)
 
 
 **Ưu nhược điểm của việc sử dụng mạng Vxlan trong trung tâm dữ liệu**  
