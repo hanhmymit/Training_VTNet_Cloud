@@ -54,10 +54,9 @@ forks=100
 Trong file globals.yml  
 ```kolla_base_distro: "ubuntu"
 kolla_install_type: "source"
-
-network_interface: enp0s8
-neutron_external_interface: enp0s3
-kolla_internal_vip_address: 10.0.2.15
+kolla_internal_vip_address: "10.0.2.15"
+network_interface: "enp0s3"
+neutron_external_interface: "enp0s8"
 nova_compute_virt_type: "qemu"
 enable_haproxy: "no"
 enable_cinder: "yes"
