@@ -54,7 +54,7 @@ VXLAN frame format:
 * ```sudo apt install net-tools```  
 * ```sudo apt-get install openvswitch-switch -y```  
 * ```libvirtd --version```  
-![image](https://user-images.githubusercontent.com/46991949/118910290-6c454a00-b94e-11eb-9f08-d89426584f46.png)  
+![image](https://user-images.githubusercontent.com/46991949/121205399-d6904100-c8a1-11eb-84c5-de75c5a902b8.png)  
 
 **Step 2. Tạo 2 vswitch br0 và br1 trên cả 2 Host**  
 ```sudo ovs-vsctl add-br br0```  
