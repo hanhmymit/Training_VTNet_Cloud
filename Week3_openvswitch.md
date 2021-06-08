@@ -31,11 +31,11 @@ VXLAN frame format:
 
 1. Topology:  
 * Host 1: 192.168.1.2   
-    vswitch br1: 10.1.1.10  
+    vswitch br1: 10.1.1.12  
     vswitch br0: 192.168.0.112    enp0s3
     
 * Host 2: 192.168.1.227   
-    vswitch br1: 10.1.1.11  
+    vswitch br1: 10.1.1.13  
     vswitch br0: 192.168.0.114    enp0s8
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
@@ -77,9 +77,9 @@ VXLAN frame format:
 
 **Step 6. Cấu hình IP cho br1 trên Host**
 * Trên host1
-```sudo ifconfig br1 10.1.1.10/24```
+```sudo ifconfig br1 10.1.1.12/24```
 * Trên host2
-```sudo ifconfig br1 10.1.1.11/24```  
+```sudo ifconfig br1 10.1.1.13/24```  
 
 **Step 7. Cấu hình VXLAN tunnel cho vswitch br0 trên host**
 * Trên host1
@@ -90,9 +90,9 @@ VXLAN frame format:
 
 **Step 9. Check connection to other node via VXLAN with Ping** 
 
-Từ host1. Sử dụng câu lệnh ```ping -I br1 10.1.1.11``` để ping sang host2  
-![image](https://user-images.githubusercontent.com/46991949/120956572-06462880-c77e-11eb-85e4-dea4e422825e.png)
-![image](https://user-images.githubusercontent.com/46991949/120958671-66d76480-c782-11eb-80c4-1622e0c139a3.png)
+Từ host1. Sử dụng câu lệnh ```ping -I br1 10.1.1.13``` để ping sang host2  
+![image](https://user-images.githubusercontent.com/46991949/121212560-ae0b4580-c8a7-11eb-82b5-fe7cdb604c53.png)
+![image](https://user-images.githubusercontent.com/46991949/121213985-f0815200-c8a8-11eb-8ec9-b1c1346a600d.png)
 
 
 **Ưu nhược điểm của việc sử dụng mạng Vxlan trong trung tâm dữ liệu**  
