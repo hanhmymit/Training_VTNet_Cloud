@@ -7,7 +7,7 @@
 * Bridgr Adapter: enp0s8 : 192.168.0.114
 * Host-only Adapter: enp0s9: 192.168.56.101
 
-**Step 1: Cài đặt các gói yêu cầu bắt buộc trên ubuntu 18.04  
+**Step 1: Cài đặt các gói yêu cầu bắt buộc trên ubuntu 18.04**    
 
 1. Cập nhật và nâng cấp các gói  
 ```sudo apt update``` 
@@ -90,6 +90,8 @@ Người dùng: admin
 Mật khẩu:
 Chạy:
 ```cat /etc/kolla/passwords.yml | grep -i keystone_admin_password```  
-![image](https://user-images.githubusercontent.com/46991949/120999917-dca7f400-c7b3-11eb-89e5-290c720a080d.png)
+![image](https://user-images.githubusercontent.com/46991949/121219015-7acbb500-c8ad-11eb-962a-5dc90e3d4b14.png)
+![image](https://user-images.githubusercontent.com/46991949/121219070-84551d00-c8ad-11eb-8e7a-6b532152d202.png)
+
 
 
