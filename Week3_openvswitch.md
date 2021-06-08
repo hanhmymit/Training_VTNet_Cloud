@@ -81,7 +81,7 @@ VXLAN frame format:
 * Trên host2
 ```sudo ifconfig br1 10.1.1.11/24```  
 
-**Step 8. Cấu hình VXLAN tunnel cho vswitch br0 trên host**
+**Step 7. Cấu hình VXLAN tunnel cho vswitch br0 trên host**
 * Trên host1
 ```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.0.114```  
 * Trên host2  
