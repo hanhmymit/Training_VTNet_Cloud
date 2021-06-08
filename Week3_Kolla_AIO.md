@@ -45,9 +45,11 @@ forks=100
 ```sudo mkdir etc/kolla```  
 2. Cấp quyền sở hữu thư mục cấu hình Kolla cho người dùng mà bạn đã kích hoạt môi trường ảo triển khai Koll-ansible  
 ```sudo chown $USER:$USER /etc/kolla```  
-3. Sao chép tệp cấu hình Kolla chính globals.ymlvà tệp mật khẩu dịch vụ OpenStack passwords.ymlvào thư mục cấu hình Kolla ở trên từ môi trường ảo  
+3. Sao chép perfals.yml và mật khẩu.yml vào thư mục / etc / kolla
 ```sudo cp $HOME/kolla-openstack/share/kolla-ansible/etc_examples/kolla/* /etc/kolla/```  
-4. Cấu hình mạng  
+4. Sao chépall-in-one vào thư mục hiện tại
+```cp path/to/venv/share/kolla-ansible/ansible/inventory/* .```  
+6. Cấu hình mạng  
 ```nano /etc/kolla/globals.yml``` 
 Trong file globals.yml  
 ```kolla_base_distro: "ubuntu"
