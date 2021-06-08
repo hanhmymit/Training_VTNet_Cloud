@@ -31,11 +31,11 @@ VXLAN frame format:
 
 1. Topology:  
 * Host 1: 192.168.1.2   
-    vswitch br1: 10.0.1.10  
+    vswitch br1: 10.1.1.10  
     vswitch br0: 192.168.1.2    enp0s3
     
 * Host 2: 192.168.1.227   
-    vswitch br1: 10.0.1.11  
+    vswitch br1: 10.1.1.11  
     vswitch br0: 192.168.1.227    enp0s3
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
