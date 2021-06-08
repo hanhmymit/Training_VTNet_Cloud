@@ -46,9 +46,9 @@ forks=100
 2. Cấp quyền sở hữu thư mục cấu hình Kolla cho người dùng mà bạn đã kích hoạt môi trường ảo triển khai Koll-ansible  
 ```sudo chown $USER:$USER /etc/kolla```  
 3. Sao chép perfals.yml và mật khẩu.yml vào thư mục / etc / kolla  
-```sudo cp $HOME/kolla-openstack/share/kolla-ansible/etc_examples/kolla/* /etc/kolla/```  
+```cp -r venv/share/kolla-ansible/etc_examples/kolla/* /etc/kolla```  
 4. Sao chépall-in-one vào thư mục hiện tại  
-```cp path/to/venv/share/kolla-ansible/ansible/inventory/* .```  
+```cp venv/share/kolla-ansible/ansible/inventory/* .```  
 5. Cấu hình mạng  
 ```nano /etc/kolla/globals.yml``` 
 Trong file globals.yml  
