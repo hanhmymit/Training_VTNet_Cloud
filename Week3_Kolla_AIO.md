@@ -4,7 +4,7 @@
 *1. Hệ điều hành: Ubuntu 18.04, Ram: 4G,SSD CPU:02*  
 *Network*
 * NAT: enp0s3 10.0.2.15
-* Bridgr Adapter: enp0s8 : 192.168.0.110
+* Bridgr Adapter: enp0s8 : 192.168.0.114
 * Host-only Adapter: enp0s9: 192.168.56.101
 
 **Step 1: Cài đặt các gói yêu cầu bắt buộc trên ubuntu 18.04  
