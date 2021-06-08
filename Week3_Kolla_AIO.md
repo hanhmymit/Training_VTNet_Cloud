@@ -45,11 +45,11 @@ forks=100
 ```sudo mkdir etc/kolla```  
 2. Cấp quyền sở hữu thư mục cấu hình Kolla cho người dùng mà bạn đã kích hoạt môi trường ảo triển khai Koll-ansible  
 ```sudo chown $USER:$USER /etc/kolla```  
-3. Sao chép perfals.yml và mật khẩu.yml vào thư mục / etc / kolla
+3. Sao chép perfals.yml và mật khẩu.yml vào thư mục / etc / kolla  
 ```sudo cp $HOME/kolla-openstack/share/kolla-ansible/etc_examples/kolla/* /etc/kolla/```  
-4. Sao chépall-in-one vào thư mục hiện tại
+4. Sao chépall-in-one vào thư mục hiện tại  
 ```cp path/to/venv/share/kolla-ansible/ansible/inventory/* .```  
-6. Cấu hình mạng  
+5. Cấu hình mạng  
 ```nano /etc/kolla/globals.yml``` 
 Trong file globals.yml  
 ```kolla_base_distro: "ubuntu"
@@ -64,7 +64,7 @@ enable_cinder: "yes"
 enable_cinder_backup: "no"
 enable_cinder_backend_lvm: "yes"
 ```  
-5. Tạo mật khẩu Kolla  
+6. Tạo mật khẩu Kolla  
 passwords.yml Tệp cấu hình Kolla lưu trữ các mật khẩu dịch vụ OpenStack khác nhau. Bạn có thể tự động tạo mật khẩu bằng cách sử dụng Kolla-ansible kolla-genpwdtrong môi trường ảo của mình.  
 ```kolla-genpwd```  
 Tất cả các mật khẩu đã tạo sẽ được điền vào /etc/kolla/passwords.yml  
