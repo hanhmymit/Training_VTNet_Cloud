@@ -32,11 +32,11 @@ VXLAN frame format:
 1. Topology:  
 * Host 1: 192.168.1.2   
     vswitch br1: 10.1.1.10  
-    vswitch br0: 192.168.1.2    enp0s3
+    vswitch br0: 192.168.0.112    enp0s3
     
 * Host 2: 192.168.1.227   
     vswitch br1: 10.1.1.11  
-    vswitch br0: 192.168.1.227    enp0s3
+    vswitch br0: 192.168.0.114    enp0s8
 ![image](https://user-images.githubusercontent.com/46991949/118908940-7b2afd00-b94c-11eb-925b-6c9965664dde.png)
 
 2. Mô tả:
@@ -68,12 +68,12 @@ VXLAN frame format:
 ![image](https://user-images.githubusercontent.com/46991949/118913933-9568d900-b954-11eb-80cd-700fd9276ba9.png)
  
 ```sudo ovs-vsctl add-port br0 enp0s3```  
-```sudo ip a flush enp0s3 && sudo ifconfig br0 192.168.1.2/24```  
+```sudo ip a flush enp0s3 && sudo ifconfig br0 192.168.0.112/24```  
 *Note: Nếu muốn xóa một cổng để khôi phục lại có thể dùng: sudo ovs-vsctl del-port br1 enp0s3*  
 
 **Step 5. Trên host2 tạo chế độ mạng bridge cho vswitch br0 và card mạng enp0s3**  
-```sudo ovs-vsctl add-port br0 enp0s3```   
-```sudo ip a flush enp0s3 && sudo ifconfig br0 192.168.1.227/24```  
+```sudo ovs-vsctl add-port br0 enp0s8```   
+```sudo ip a flush enp0s3 && sudo ifconfig br0 192.168.0.114/24```  
 
 **Step 6. Cấu hình IP cho br1 trên Host**
 * Trên host1
@@ -83,18 +83,10 @@ VXLAN frame format:
 
 **Step 8. Cấu hình VXLAN tunnel cho vswitch br0 trên host**
 * Trên host1
-```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.227```  
-![image](https://user-images.githubusercontent.com/46991949/119121314-743ce100-ba57-11eb-8c8f-531488305f0b.png)
-
-*Cấu hính mạng lúc này*  
-![image](https://user-images.githubusercontent.com/46991949/119121377-89b20b00-ba57-11eb-8d92-df0931144055.png)
-
+```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.0.114```  
 * Trên host2  
-```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.1.2```  
-![image](https://user-images.githubusercontent.com/46991949/119121425-99315400-ba57-11eb-8137-6312aedea8cc.png)
-
-*Cấu hình mạng lúc này*  
-![image](https://user-images.githubusercontent.com/46991949/119121469-a9e1ca00-ba57-11eb-9894-d13e47d9d9af.png)
+```sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan option:remote_ip=192.168.0.112```  
+![image](https://user-images.githubusercontent.com/46991949/121206894-0724aa80-c8a3-11eb-92f9-6c19573155d5.png)
 
 **Step 9. Check connection to other node via VXLAN with Ping** 
 
