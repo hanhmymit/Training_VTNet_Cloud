@@ -72,7 +72,43 @@ services:
 Tại main menu của Jenkins bạn click New Item, khai báo job name và chọn type là Pipeline và click OK.  
 Tại page config của job bạn chọn tab Pipeline và khai báo như hình:  
 ![image](https://user-images.githubusercontent.com/46991949/121712222-b2cd3500-cb05-11eb-93a3-a92b886c9cbf.png)
-Sau khi hoàn tất thì click save để lưu thông tin job  
+Sau khi hoàn tất thì click save để lưu thông tin job   
+
+**Step 4: Setup Jenkins Pipeline**  
+Thông tin pipeline được lưu trong file Jenkinsfile ở repository tutorial-jenkins-pipeline. Pipeline của chúng ta sẽ được chia thành 3 stage:  
+1. Build Code (checkout source code về và build code js)  
+2. Build Image (build image mới và push lên Docker Hub)  
+3. Deploy (deploy image mới lên server)  
+
+Trong file Jenkinsfile chỉnh sửa
+```environment {
+ FRONTEND_GIT = 'https://github.com/Hanh09031998/tutorial-jenkins-frontend.git'
+ FRONTEND_BRANCH = 'master'
+ FRONTEND_IMAGE = 'Hanh09031998/tutorial-jenkins-frontend'
+ FRONTEND_SERVER = '1.2.3.4'
+}
+```  
+Trong đó:   
+* FRONTEND_GIT: URL của git lưu source code react  
+* FRONTEND_BRANCH: Tên branch của source code muốn build  
+* FRONTEND_IMAGE: Tên image tương ứng với repository mà bạn đã tạo trên Docker Hub  
+* FRONTEND_SERVER: IP của server sẽ dùng để deploy app  
+* Bạn khai báo các thông tin này theo thông tin tương ứng của bạn.   
+
+Để có thể ssh vào server thông qua jenkins thì bạn cần install plugin SSH Pipeline Steps và tạo 1 credential với kind là SSH Username with private key và ID là ssh  
+![image](https://user-images.githubusercontent.com/46991949/121718022-06428180-cb0c-11eb-92fb-e62d30ae4722.png)  
+
+Tiếp theo mình sẽ mở giao diện blue ocean
+![image](https://user-images.githubusercontent.com/46991949/121718272-56b9df00-cb0c-11eb-9335-b38e6db3eb54.png)  
+
+![image](https://user-images.githubusercontent.com/46991949/121718463-8bc63180-cb0c-11eb-8186-887e36f77a96.png)
+
+
+
+
+ 
+
+
 
 
 
