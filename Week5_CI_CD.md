@@ -71,7 +71,7 @@ services:
 **Step 3: Tạo Jenkins Pipeline**  
 Tại main menu của Jenkins bạn click New Item, khai báo job name và chọn type là Pipeline và click OK.  
 Tại page config của job bạn chọn tab Pipeline và khai báo như hình:  
-![image](https://user-images.githubusercontent.com/46991949/121711365-bb713b80-cb04-11eb-83bb-99302bb04f6b.png)
+![image](https://user-images.githubusercontent.com/46991949/121712222-b2cd3500-cb05-11eb-93a3-a92b886c9cbf.png)
 Sau khi hoàn tất thì click save để lưu thông tin job  
 
 
