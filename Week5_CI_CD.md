@@ -27,5 +27,19 @@ Dưới đây là các bước thông thường của quá trình release tính 
 * Bước 6: Owner sẽ accept merge request.  
 * Bước 7: [Auto] Hệ thống sẽ tự động thực hiện test source code, nếu PASS sẽ enable tính năng cho phép deploy lên production server.  
 * Bước 8: Owner review là merge request OK, test OK. Tiến hành nhấn nút để deploy các thay đổi lên môi trường production.  
-* Bước 9: Tester/QA sẽ vào hệ thống production để làm UAT và confirm mọi thứ OK. Nếu không OK, Owner có thể nhấn nút Deploy phiên bản master trước đó để rollback hệ thống về trạng thái stable trước đó.    
+* Bước 9: Tester/QA sẽ vào hệ thống production để làm UAT và confirm mọi thứ OK. Nếu không OK, Owner có thể nhấn nút Deploy phiên bản master trước đó để rollback hệ thống về trạng thái stable trước đó.      
+
+## 3. Chuẩn bị  
+**Cài đặt docker**  
+**Cài đặt gitlab9**  
+* Bước 1: Cài đặt cấu hình  
+```sudo apt-get install openssh-server```  
+```sudo apt-get install postfix```  
+* Bước 2:Tải gói omnibus và cài đặt    
+```wget https://downloads-packages.s3.amazonaws.com/ubuntu-12.04/gitlab_7.9.2-omnibus-1_amd64.deb```  
+```sudo dpkg –i gitlab_7.9.2-omnibus-1_amd63.deb```  
+* Bước 3: Cấu hình GitLab  
+```sudo gitlab-ctl reconfigure```  
+* Bước 4: Vào Hostname và đăng nhập  
+* 
 
