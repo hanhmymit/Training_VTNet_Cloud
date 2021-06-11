@@ -35,5 +35,30 @@ Dưới đây là các bước thông thường của quá trình release tính 
 
 ## 4. Triển khai CI/CD với Jenkins  
 
-**Step 1: 
+**Step 1: Setup Server**  
+Tạo file docker-compose.yaml trong thư mục ~/app với nội dung như sau:  
+```version: "3"
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    ports:
+      - 80:80
+  ```  
+  
+  **Step 2: Install Jenkins**  
+  Chạy command sau để install trên local  
+  ```docker volume create --name jenkins_data
+docker run -d -p 80:8080 --name jenkins \
+  --network jenkins-network \
+  --volume jenkins_data:/bitnami/jenkins \
+  --volume "$HOME":/home \
+  --volume /var/run/docker.sock:/var/run/docker.sock --privileged \
+  --volume $(which docker):/usr/bin/docker --privileged \
+  bitnami/jenkins:latest
+  ```  
+  ![image](https://user-images.githubusercontent.com/46991949/121698478-3e3fc980-caf8-11eb-8ae5-ac64fcf4e454.png)
+  Sau đó bạn truy cập Jenkins qua url http://localhost:8080/ và làm theo hướng dẫn https://jenkins.io/doc/book/installing/#setup-wizard để hoàn thành quá trình setup  
+  
+  
+  
 
