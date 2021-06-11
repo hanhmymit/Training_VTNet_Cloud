@@ -31,5 +31,9 @@ Dưới đây là các bước thông thường của quá trình release tính 
 
 ## 3. Chuẩn bị  
 **Cài đặt docker**  
-**Cài đặt github**
+**Cài đặt docker-Compose**  
+
+## 4. Triển khai CI/CD với Jenkins  
+
+**Step 1: 
 
