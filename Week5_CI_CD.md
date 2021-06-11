@@ -47,17 +47,29 @@ services:
   
   **Step 2: Install Jenkins**  
   Chạy command sau để install trên local  
-  ```docker volume create --name jenkins_data
-docker run -d -p 80:8080 --name jenkins \
-  --network jenkins-network \
-  --volume jenkins_data:/bitnami/jenkins \
-  --volume "$HOME":/home \
-  --volume /var/run/docker.sock:/var/run/docker.sock --privileged \
-  --volume $(which docker):/usr/bin/docker --privileged \
-  bitnami/jenkins:latest
+  ```docker run \
+  -u root \
+  --rm \
+  -d \
+  -p 8080:8080 \
+  -p 50000:50000 \
+  -v jenkins-data:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  jenkinsci/blueocean
   ```  
-  ![image](https://user-images.githubusercontent.com/46991949/121698478-3e3fc980-caf8-11eb-8ae5-ac64fcf4e454.png)
-  Sau đó bạn truy cập Jenkins qua url http://localhost:8080/ và làm theo hướng dẫn https://jenkins.io/doc/book/installing/#setup-wizard để hoàn thành quá trình setup  
+  Sau đó bạn truy cập Jenkins qua url http://localhost:8080/ và làm theo hướng dẫn https://jenkins.io/doc/book/installing/#setup-wizard để hoàn thành quá trình setup    
+  **Lưu ý ở đây, để có thể lấy được initialAdminPassword bạn có thể làm như sau**    
+  Lấy CONTAINER ID bằng cách ```docker ps -a```    
+  Sau đó dùng lệnh ```docker container exec -it CONTAINER ID bash```  
+  Cuối cùng ```cat /var/jenkins_home/secrets/initialAdminPassword```    
+  Và copy đoạn mã doán vào đây:  
+  ![image](https://user-images.githubusercontent.com/46991949/121709738-0e49f380-cb03-11eb-945a-a06874980118.png)  
+  
+  Sau khi đã tạo tài khoản người dùng đầu tiên, đăng nhập, giao diện Jenkins lúc này sẽ là  
+  ![image](https://user-images.githubusercontent.com/46991949/121710839-2c642380-cb04-11eb-8d6d-c6c492ce5427.png)
+
+
+
   
   
   
