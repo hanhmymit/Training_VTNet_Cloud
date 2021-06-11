@@ -45,7 +45,7 @@ services:
       - 80:80
   ```  
   
-  **Step 2: Install Jenkins**  
+**Step 2: Install Jenkins**  
   Chạy command sau để install trên local  
   ```docker run \
   -u root \
@@ -66,7 +66,15 @@ services:
   ![image](https://user-images.githubusercontent.com/46991949/121709738-0e49f380-cb03-11eb-945a-a06874980118.png)  
   
   Sau khi đã tạo tài khoản người dùng đầu tiên, đăng nhập, giao diện Jenkins lúc này sẽ là  
-  ![image](https://user-images.githubusercontent.com/46991949/121710839-2c642380-cb04-11eb-8d6d-c6c492ce5427.png)
+  ![image](https://user-images.githubusercontent.com/46991949/121710839-2c642380-cb04-11eb-8d6d-c6c492ce5427.png)  
+  
+**Step 3: Tạo Jenkins Pipeline**  
+Tại main menu của Jenkins bạn click New Item, khai báo job name và chọn type là Pipeline và click OK.  
+Tại page config của job bạn chọn tab Pipeline và khai báo như hình:  
+![image](https://user-images.githubusercontent.com/46991949/121711365-bb713b80-cb04-11eb-83bb-99302bb04f6b.png)
+Sau khi hoàn tất thì click save để lưu thông tin job  
+
+
 
 
 
