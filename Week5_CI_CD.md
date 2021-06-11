@@ -31,15 +31,5 @@ Dưới đây là các bước thông thường của quá trình release tính 
 
 ## 3. Chuẩn bị  
 **Cài đặt docker**  
-**Cài đặt gitlab9**  
-* Bước 1: Cài đặt cấu hình  
-```sudo apt-get install openssh-server```  
-```sudo apt-get install postfix```  
-* Bước 2:Tải gói omnibus và cài đặt    
-```wget https://downloads-packages.s3.amazonaws.com/ubuntu-12.04/gitlab_7.9.2-omnibus-1_amd64.deb```  
-```sudo dpkg –i gitlab_7.9.2-omnibus-1_amd63.deb```  
-* Bước 3: Cấu hình GitLab  
-```sudo gitlab-ctl reconfigure```  
-* Bước 4: Vào Hostname và đăng nhập  
-* 
+**Cài đặt github**
 
