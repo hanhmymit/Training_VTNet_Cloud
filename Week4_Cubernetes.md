@@ -50,12 +50,15 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 *Thì có thế fix bằng cách bỏ qua kiểm tra CPU (kể từ v1.5.2) bằng cách sử dụng      
 ```minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1```  
 
-*Hoặc bạn gặp phải lỗi ```Exiting due to GUEST_MISSING_CONNTRACK: Sorry, Kubernetes 1.20.2 requires conntrack to be installed in root's path```  
-*Thì có thể sử dụng 2 câu laanhj sau để fix*  
+*Hoặc bạn gặp phải lỗi   
+```Exiting due to GUEST_MISSING_CONNTRACK: Sorry, Kubernetes 1.20.2 requires conntrack to be installed in root's path```    
+*Thì có thể sử dụng 2 câu lệnh sau để fix*    
 ```sudo apt-get install -y conntrack```  
 ```sudo -E minikube start --driver=none```  
 Output  
 ![image](https://user-images.githubusercontent.com/46991949/120010069-eb014d80-c006-11eb-9f09-93c3f6e8ef08.png)
+![image](https://user-images.githubusercontent.com/46991949/122777612-6688ae80-d2d6-11eb-9b5e-6d2f103d4ab9.png)
+
 
 ## B: Deploy a WordPress blog on Minikube with persistent data ##  
 
@@ -242,5 +245,9 @@ spec:
   ```service/wordpress created```  
   ```persistentvolumeclaim/wp-pv-claim created```  
   ```deployment.apps/wordpress created```  
+  ![image](https://user-images.githubusercontent.com/46991949/122777878-a6e82c80-d2d6-11eb-8ca8-d04e8c2b2e7d.png)
+![image](https://user-images.githubusercontent.com/46991949/122777944-b7000c00-d2d6-11eb-8139-7e92dc07fdc3.png)
+![image](https://user-images.githubusercontent.com/46991949/122777976-c0897400-d2d6-11eb-98a6-58391bc19e44.png)
+
   
 
