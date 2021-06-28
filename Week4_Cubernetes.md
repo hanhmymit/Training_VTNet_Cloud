@@ -1,6 +1,51 @@
 ## Install Kubernetes on PC by using mini-kube and specify Kubernetes components and Deploy Wordpress on Kubernetses ##  
 
 *Giới thiệu*  
+
+**1. Kubernetes**  
+
+Kubernetes (hoặc k8s) là một nền tảng mã nguồn mở, sử dụng để tự động hoá việc quản lý, scaling và triển khai ứng dụng dưới dạng container hay còn gọi là Container orchestration engine. Kubernetes giúp chúng ta loại bỏ rất nhiều các quy trình thủ công liên quan đến việc triển khai và mở rộng các containerized applications.  
+
+Kubernetes có thể gọi tắt là k8s - tức là bắt đầu bằng chữ "k", giữa là 8 ký tự và cuối là chữ "s" 😃)  
+
+Kubernetes orchestration cho phép chúng ta xây dựng các dịch vụ ứng dụng mở rộng với nhiều containers. Nó lên lịch các containers đó trên một cụm, mở rộng các containers và quản lý tình trạng của các containers theo thời gian.  
+
+Kubernetes là một công cụ mạnh mẽ được phát triển bởi Google, trước khi public thì Google đã sử dụng nó để quản lý hàng tỉ container của mình. 
+
+**Kubenetes giải quyết vấn đề gì?**  
+
+Bằng việc sử dụng docker, trên 1 host bạn có thể tạo ra nhiều container. Tuy nhiên nếu bạn có ý định sử dụng trên môi trường production thì phải bắt buộc phải nghĩ đến những vấn đề dưới đây:
+
+Việc quản lý hàng loạt docker host
+Container Scheduling
+Rolling update
+Scaling/Auto Scaling
+Monitor vòng đời và tình trạng sống chết của container.
+Self-hearing trong trường hợp có lỗi xãy ra. (Có khả năng phát hiện và tự correct lỗi)
+Service discovery
+Load balancing
+Quản lý data, work node, log
+Infrastructure as Code
+Sự liên kết và mở rộng với các hệ thống khác
+Bằng việc sử dụng một Container orchestration engine như K8s có thể giải quyết được nhưng vấn đề trên đây. Trong trường hợp không sử dụng k8s, Thì sẽ phải cần thiết tạo ra cơ chế tự động hoá cho những cái kể trên, như thế thì cực kỳ tốn thời gian và không khả thi.
+
+**Các thành phần của K8S**  
+1. Pods
+![image](https://user-images.githubusercontent.com/46991949/123567565-a676f680-d7ec-11eb-85a3-2186e470ec35.png)
+
+Khi triển khai ứng dụng, Kubernetes tạo ra Pod để lưu trữ phiên bản chạy của ứng dụng của bạn. Một Pod là một khái niệm trừu tượng của Kubernetes, đại diện cho một nhóm gồm một hoặc nhiều ứng dụng containers (ví dụ như Docker hoặc rkt) và một số tài nguyên được chia sẻ cho các containers đó.  
+Mỗi Pod được gắn với Node nơi nó được lên lịch trình, và tiếp tục ở đó cho đến khi chấm dứt (theo chính sách khởi động lại). Trong trường hợp có lỗi ở Node, các Pods giống nhau được lên lịch trình trên các Nodes có sẵn khác trong cluster.  
+
+2. Notes
+
+Một Pod luôn chạy trên một Node. Một Node là một máy worker trong Kubernetes và có thể là máy ảo hoặc máy vật lý, tuỳ thuộc vào cluster. Mỗi Node được quản lí bởi Master. Một Node có thể chứa nhiều Pods và Kubernetes master tự động xử lí việc lên lịch trình các Pods thuộc các Nodes ở trong cluster. Việc lên lịch trình tự động của Master sẽ tính đến các tài nguyên có sẵn trên mỗi Node.
+
+Mỗi Node ở Kubernetes chạy ít nhất:
+
+* Kubelet, một quy trình chịu trách nhiệm liên lạc giữa Kubernetes Master và Node; quản lí các Pods và các containers đang chạy trên cùng một máy.
+* Một container runtime (như Docker, rkt) chịu trách nhiệm lấy container image từ registry, giải nén container và chạy ứng dụng. Các containers chỉ nên được lên lịch trình cùng nhau trong một Pod duy nhất nếu chúng được liên kết chặt chẽ.
+![image](https://user-images.githubusercontent.com/46991949/123568661-01a9e880-d7ef-11eb-8314-f7d0c9a49cbc.png)
+
 *Minikube là một công cụ mã nguồn mở cho phép bạn thiết lập một cụm Kubernetes một nút trên máy cục bộ của bạn. Cụm được chạy bên trong một máy ảo và bao gồm Docker, cho phép bạn chạy các vùng chứa bên trong nút.*  
 
 
