@@ -287,20 +287,32 @@ spec:
           claimName: mysql-pv-claim
   ```  
   3. Lần lượt chạy các lệnh  
-    ```sudo kubectl apply -f mysql-deployment.yaml```  
-   Output  
-    ``` service/wordpress-mysql created```  
-    ```persistentvolumeclaim/mysql-pv-claim created```  
-    ```deployment.apps/wordpress-mysql created```  
+    ```sudo kubectl apply -f mysql-deployment.yaml```    
   Tiếp tục chạy    
     ```kubectl apply -f wordpress-deployment.yaml```  
   Output    
-    ```service/wordpress created```  
-    ```persistentvolumeclaim/wp-pv-claim created```  
-    ```deployment.apps/wordpress created```  
-  ![image](https://user-images.githubusercontent.com/46991949/122777878-a6e82c80-d2d6-11eb-8ca8-d04e8c2b2e7d.png)
-![image](https://user-images.githubusercontent.com/46991949/122777944-b7000c00-d2d6-11eb-8139-7e92dc07fdc3.png)
-![image](https://user-images.githubusercontent.com/46991949/122777976-c0897400-d2d6-11eb-98a6-58391bc19e44.png)
+ ![image](https://user-images.githubusercontent.com/46991949/123580119-59eae580-d803-11eb-83fe-260414809168.png)
+ ![image](https://user-images.githubusercontent.com/46991949/123580190-81da4900-d803-11eb-80f0-ba42b9db25fb.png)
+ 
+ Hiển thị trạng thái Pods
+![image](https://user-images.githubusercontent.com/46991949/123580359-e2698600-d803-11eb-8184-30c9c409c2a6.png)
+
+Kiểm tra pod, service và deployment
+![image](https://user-images.githubusercontent.com/46991949/123580485-22c90400-d804-11eb-9cdc-1a25fbc1e906.png)
+![image](https://user-images.githubusercontent.com/46991949/123580557-4d1ac180-d804-11eb-832d-e02d4acc51fc.png)
+
+Chạy lệnh 
+![image](https://user-images.githubusercontent.com/46991949/123580657-79364280-d804-11eb-8a03-4748f6ada4ca.png)
+
+Ta thấy rằng external-ip của wordpress-service luôn ở trong trạng thái pending. Do đó nên ta vẫn chưa tìm thấy được ip để kết nối tới wordpress. Lý do luôn ở trạng thái như trên là bởi các custom Kubernetes Cluster (như minikube, kubeadm) không có các LoadBlalancer tích hợp (các cloud AWS hay Google Cloud đều có)  
+
+Giải quyết bằng cách chạy lệnh ```minikube service list```  
+![image](https://user-images.githubusercontent.com/46991949/123580795-b995c080-d804-11eb-9881-be7672aeb87d.png)
+
+Ta nhìn thấy địa chỉ sau http://192.168.  49.2:30338, và đây sẽ là địa chỉ truy cập
+![image](https://user-images.githubusercontent.com/46991949/123581236-b222e700-d805-11eb-940d-1f3cdd4942c0.png)
+
+
 
   
 
