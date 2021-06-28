@@ -102,7 +102,8 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
   ```sudo -E minikube start --driver=none```  
 Output  
 ![image](https://user-images.githubusercontent.com/46991949/120010069-eb014d80-c006-11eb-9f09-93c3f6e8ef08.png)
-![image](https://user-images.githubusercontent.com/46991949/122777612-6688ae80-d2d6-11eb-9b5e-6d2f103d4ab9.png)
+![image](https://user-images.githubusercontent.com/46991949/122777612-6688ae80-d2d6-11eb-9b5e-6d2f103d4ab9.png)  
+
 
 
 ## B: Deploy a WordPress blog on Minikube with persistent data ##  
