@@ -66,12 +66,14 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 **Step 3: Cài đặt Minikube**  
 
 1. Đầu tiên, tải xuống bản nhị phân Minikube mới nhất bằng lệnh wget  
-```wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64```  
-2. Sao chép tệp đã tải xuống và lưu trữ vào thư mục / usr / local / bin / minikube với  
-  ```sudo cp minikube-linux-amd64 /usr/local/bin/minikube```  
+```curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64```  
+2. Cài đặt vào thư mục / usr / local / bin / minikube với  
+  ```sudo install minikube-linux-amd64 /usr/local/bin/minikube```  
 3. Cấp quyền điều hành tệp bằng lệnh chmod  
-  ```sudo chmod 755 /usr/local/bin/minikube```  
-4. xác minh rằng bạn đã cài đặt thành công Minikube bằng cách kiểm tra phiên bản của phần mềm  
+  ```sudo chmod 755 /usr/local/bin/minikube```   
+4. Config sử dụng driver là docker
+  ```minikube config set driver docker```
+6. xác minh rằng bạn đã cài đặt thành công Minikube bằng cách kiểm tra phiên bản của phần mềm  
   ```minikube version```  
 ![image](https://user-images.githubusercontent.com/46991949/119974088-76b2b400-bfde-11eb-9dad-221041554ba2.png)
 
@@ -88,7 +90,7 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 ![image](https://user-images.githubusercontent.com/46991949/119974434-d741f100-bfde-11eb-8d50-ff138cf4826b.png)  
 
 **Step 5: Khởi động Minikube**  
-
+  ```sudo usermod -aG docker $USER && newgrp docker```
   ```minikube start```   
 *Note:Nếu gặp lỗi như sau:  
 ![image](https://user-images.githubusercontent.com/46991949/119990283-5856b380-bff2-11eb-99ad-a88c663c1afc.png)  
@@ -103,6 +105,11 @@ Sẽ cần một máy ảo trong đó bạn có thể thiết lập cụm nút �
 Output  
 ![image](https://user-images.githubusercontent.com/46991949/120010069-eb014d80-c006-11eb-9f09-93c3f6e8ef08.png)
 ![image](https://user-images.githubusercontent.com/46991949/122777612-6688ae80-d2d6-11eb-9b5e-6d2f103d4ab9.png)  
+
+Mở dashbroad của kubernet
+  ```minikube dashboard --url```  
+![image](https://user-images.githubusercontent.com/46991949/123578279-a9c7ad80-d7ff-11eb-9abf-ced10acda3ac.png)
+![image](https://user-images.githubusercontent.com/46991949/123578765-b567a400-d800-11eb-98b3-2181b6b6fd02.png)
 
 
 
